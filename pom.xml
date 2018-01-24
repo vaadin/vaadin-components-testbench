@@ -57,6 +57,17 @@
             <version>1.7.25</version>
             <scope>test</scope>
         </dependency>
+        <!-- You must download and run the DCEVM installer for your JDK version 
+            from https://github.com/dcevm/dcevm/releases before using Hotswap Agent. 
+            Once installed, you can launch jetty:run from your IDE using: the JVM args 
+            -XXaltjvm=dcevm -javaagent:/your/home/.m2/repository/org/hotswapagent/hotswap-agent-core/1.1.0/hotswap-agent-core-1.1.0.jar -->
+        <dependency>
+            <groupId>org.hotswapagent</groupId>
+            <artifactId>hotswap-agent</artifactId>
+            <version>1.1.0</version>
+            <scope>provided</scope>
+            <optional>true</optional>
+        </dependency>
     </dependencies>
 
     <build>
@@ -129,4 +140,5 @@
         </plugins>
 
     </build>
+
 </project>
