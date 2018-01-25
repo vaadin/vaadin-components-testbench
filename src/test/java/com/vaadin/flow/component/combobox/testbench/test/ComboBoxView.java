@@ -19,6 +19,7 @@ import java.util.stream.IntStream;
 
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.common.testbench.test.AbstractView;
+import com.vaadin.flow.component.common.testbench.test.Person;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
@@ -26,42 +27,6 @@ import com.vaadin.flow.theme.lumo.Lumo;
 @Route("ComboBox")
 @Theme(Lumo.class)
 public class ComboBoxView extends AbstractView {
-
-    public static class Person {
-        private String firstName, lastName;
-
-        public Person() {
-
-        }
-
-        public Person(String firstName, String lastName) {
-            this.firstName = firstName;
-            this.lastName = lastName;
-        }
-
-        public String getFirstName() {
-            return firstName;
-        }
-
-        public void setFirstName(String firstName) {
-            this.firstName = firstName;
-        }
-
-        public String getLastName() {
-            return lastName;
-        }
-
-        public void setLastName(String lastName) {
-            this.lastName = lastName;
-        }
-
-        @Override
-        public String toString() {
-            return "Person [firstName=" + firstName + ", lastName=" + lastName
-                    + "]";
-        }
-
-    }
 
     public static final String TEXT = "text";
     public static final String NOTEXT = "notext";
@@ -93,8 +58,9 @@ public class ComboBoxView extends AbstractView {
         comboBoxWithBean.setId(BEANS);
         comboBoxWithBean.setItemLabelGenerator(
                 item -> item.getLastName() + ", " + item.getFirstName());
-        comboBoxWithBean.setItems(new Person("John", "Doe"),
-                new Person("Jeff", "Johnson"), new Person("Diana", "Meyer"));
+        comboBoxWithBean.setItems(new Person("John", "Doe", 20),
+                new Person("Jeff", "Johnson", 30),
+                new Person("Diana", "Meyer", 40));
         comboBoxWithBean.addValueChangeListener(e -> {
             log("ComboBox '" + e.getSource().getLabel() + "' value is now "
                     + e.getValue());

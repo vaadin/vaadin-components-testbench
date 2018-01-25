@@ -45,7 +45,7 @@ public class ComboBoxIT extends AbstractIT {
         Assert.assertEquals("Item 18", comboBoxWithText.getSelectedText());
         comboBoxWithBeans.selectByText("Doe, John");
         Assert.assertEquals(
-                "3. ComboBox 'Persons' value is now Person [firstName=John, lastName=Doe]",
+                "3. ComboBox 'Persons' value is now Person [firstName=John, lastName=Doe, age=20]",
                 getLogRow(0));
         Assert.assertEquals("Doe, John", comboBoxWithBeans.getSelectedText());
     }
