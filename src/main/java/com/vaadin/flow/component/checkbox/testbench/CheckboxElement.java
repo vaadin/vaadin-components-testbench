@@ -1,12 +1,13 @@
 package com.vaadin.flow.component.checkbox.testbench;
 
+import com.vaadin.flow.component.common.testbench.HasLabel;
 import com.vaadin.flow.component.html.testbench.InputElement;
 import com.vaadin.flow.component.html.testbench.LabelElement;
 import com.vaadin.testbench.TestBenchElement;
 import com.vaadin.testbench.elementsbase.Element;
 
 @Element("vaadin-checkbox")
-public class CheckboxElement extends TestBenchElement {
+public class CheckboxElement extends TestBenchElement implements HasLabel {
     public boolean isChecked() {
         return getPropertyBoolean("checked");
     }
@@ -15,6 +16,7 @@ public class CheckboxElement extends TestBenchElement {
         setProperty("checked", checked);
     }
 
+    @Override
     public String getLabel() {
         return (String) executeScript(
                 "return arguments[0].firstChild ? arguments[0].firstChild.textContent : '';",
