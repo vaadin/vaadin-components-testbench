@@ -1,32 +1,30 @@
 package com.vaadin.flow.component.common.testbench.test;
 
-import org.junit.After;
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.Before;
 import org.openqa.selenium.By;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
-import com.vaadin.testbench.TestBenchTestCase;
+import com.vaadin.testbench.annotations.BrowserConfiguration;
+import com.vaadin.testbench.parallel.BrowserUtil;
 
-public class AbstractIT extends TestBenchTestCase {
+public abstract class AbstractIT extends AbstractParallelSauceLabsTest {
 
     protected String getLogRow(int i) {
         return findElement(By.id("log")).findElements(By.tagName("div")).get(i)
                 .getText();
     }
 
+    @BrowserConfiguration
+    public List<DesiredCapabilities> getBrowserConfiguration() {
+        return Arrays.asList(BrowserUtil.chrome());
+    }
+
     @Before
-    public void openTest() {
-        setDriver(new ChromeDriver());
-        open();
-    }
-
-    protected void open() {
+    public void open() {
         getDriver().get("http://localhost:8080/" + getTestPath());
-    }
-
-    @After
-    public void teardown() {
-        getDriver().quit();
     }
 
     private String getTestPath() {

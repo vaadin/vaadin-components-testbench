@@ -19,6 +19,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <failOnMissingWebXml>false</failOnMissingWebXml>
+        <sauce.options>--tunnel-identifier ${maven.build.timestamp}</sauce.options>
+        <ci-sauce.version>1.132</ci-sauce.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -32,6 +34,12 @@
         </dependencies>
     </dependencyManagement>
 
+    <pluginRepositories>
+        <pluginRepository>
+            <id>vaadin-addons</id>
+            <url>http://maven.vaadin.com/vaadin-addons</url>
+        </pluginRepository>
+    </pluginRepositories>
     <repositories>
         <repository>
             <id>vaadin-addons</id>
@@ -71,6 +79,12 @@
             <version>1.1.0</version>
             <scope>provided</scope>
             <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.saucelabs</groupId>
+            <artifactId>ci-sauce</artifactId>
+            <version>${ci-sauce.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -115,29 +129,63 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <trimStackTrace>false</trimStackTrace>
                     <systemPropertyVariables>
-                        <webdriver.chrome.driver>${webdriver.chrome.driver}</webdriver.chrome.driver>
+                        <sauce.user>${sauce.user}</sauce.user>
+                        <sauce.sauceAccessKey>${sauce.sauceAccessKey}</sauce.sauceAccessKey>
+                        <sauce.options>${sauce.options}</sauce.options>
                     </systemPropertyVariables>
+                    <trimStackTrace>false</trimStackTrace>
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>com.lazerycode.selenium</groupId>
-                <artifactId>driver-binary-downloader-maven-plugin</artifactId>
-                <version>1.0.14</version>
-                <configuration>
-                    <!-- root directory that downloaded driver binaries will 
-                        be stored in -->
-                    <onlyGetDriversForHostOperatingSystem>true</onlyGetDriversForHostOperatingSystem>
-                    <rootStandaloneServerDirectory>${java.io.tmpdir}/webdriver</rootStandaloneServerDirectory>
-                    <downloadedZipFileDirectory>${java.io.tmpdir}/webdriver_zips</downloadedZipFileDirectory>
-                    <customRepositoryMap>drivers.xml</customRepositoryMap>
-                </configuration>
+                <groupId>com.saucelabs.maven.plugin</groupId>
+                <artifactId>sauce-connect-plugin</artifactId>
+                <version>2.1.23</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.saucelabs</groupId>
+                        <artifactId>ci-sauce</artifactId>
+                        <version>${ci-sauce.version}</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <!-- Start Sauce Connect prior to running the integration 
+                        tests -->
+                    <execution>
+                        <id>start-sauceconnect</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>start-sauceconnect</goal>
+                        </goals>
+                    </execution>
+                    <!-- Stop the Sauce Connect process after the integration 
+                        tests have finished -->
+                    <execution>
+                        <id>stop-sauceconnect</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>stop-sauceconnect</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.0.0</version>
                 <executions>
                     <execution>
+                        <id>read-local-properties-if-present</id>
+                        <phase>initialize</phase>
                         <goals>
-                            <goal>selenium</goal>
+                            <goal>read-project-properties</goal>
                         </goals>
+                        <configuration>
+                            <files>
+                                <file>local.properties</file>
+                            </files>
+                            <quiet>true</quiet>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
