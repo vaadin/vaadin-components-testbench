@@ -1,5 +1,6 @@
 package com.vaadin.flow.component.grid.testbench.test;
 
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -7,9 +8,11 @@ import com.vaadin.flow.component.common.testbench.test.AbstractView;
 import com.vaadin.flow.component.common.testbench.test.Person;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.Grid.Column;
+import com.vaadin.flow.component.grid.Grid.SelectionMode;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.data.provider.AbstractBackEndDataProvider;
 import com.vaadin.flow.data.provider.Query;
+import com.vaadin.flow.data.selection.SelectionEvent;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
@@ -19,7 +22,7 @@ import com.vaadin.flow.theme.lumo.Lumo;
 public class GridView extends AbstractView {
 
     public static final String NO_HEADER = "noheader";
-    public static final String HEADER = "header";
+    public static final String HEADER_MULTISELECT = "header";
     public static final String TEN_MILLION = "tenmillion";
 
     public GridView() {
@@ -30,14 +33,14 @@ public class GridView extends AbstractView {
         gridNoHeader.addColumn(person -> person.getFirstName());
         gridNoHeader.addColumn(person -> person.getLastName());
         gridNoHeader.addSelectionListener(e -> {
-            log("Grid selection changed to '"
-                    + e.getFirstSelectedItem().map(Person::toString).orElse("-")
+            log("Grid 'noheader' selection changed to '" + getSelection(e)
                     + "'");
         });
         gridNoHeader.setDataProvider(new DataGenerator(1000));
 
         Grid<Person> gridHeader = new Grid<>();
-        gridHeader.setId(HEADER);
+        gridHeader.setSelectionMode(SelectionMode.MULTI);
+        gridHeader.setId(HEADER_MULTISELECT);
         gridHeader.setWidth("100%");
         Column<Person> firstName = gridHeader
                 .addColumn(person -> person.getFirstName())
@@ -49,9 +52,7 @@ public class GridView extends AbstractView {
         gridHeader.mergeColumns(firstName, lastName).setHeader("Name");
 
         gridHeader.addSelectionListener(e -> {
-            log("Grid selection changed to '"
-                    + e.getFirstSelectedItem().map(Person::toString).orElse("-")
-                    + "'");
+            log("Grid 'header' selection changed to '" + getSelection(e) + "'");
         });
         gridHeader.setDataProvider(new DataGenerator(100));
 
@@ -66,13 +67,17 @@ public class GridView extends AbstractView {
                 .setFooter("Something");
 
         tenMillionGrid.addSelectionListener(e -> {
-            log("Grid selection changed to '"
-                    + e.getFirstSelectedItem().map(Person::toString).orElse("-")
+            log("Grid 'tenmillion' selection changed to '" + getSelection(e)
                     + "'");
         });
         tenMillionGrid.setDataProvider(new DataGenerator(10000000));
 
         add(new HorizontalLayout(gridHeader, gridNoHeader, tenMillionGrid));
+    }
+
+    private String getSelection(SelectionEvent<Person> e) {
+        return e.getAllSelectedItems().stream().map(Person::toString)
+                .collect(Collectors.joining(", "));
     }
 
     public static class DataGenerator

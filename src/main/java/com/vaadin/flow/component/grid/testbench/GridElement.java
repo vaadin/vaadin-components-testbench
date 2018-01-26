@@ -3,6 +3,8 @@ package com.vaadin.flow.component.grid.testbench;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.openqa.selenium.NoSuchElementException;
+
 import com.vaadin.testbench.TestBenchElement;
 import com.vaadin.testbench.elementsbase.Element;
 
@@ -28,12 +30,16 @@ public class GridElement extends TestBenchElement {
     }
 
     public GridTHTDElement getCell(int rowIndex, int colIndex) {
+        GridColumnElement column = getVisibleColumns().get(colIndex);
+        return getCell(rowIndex, column);
+    }
+
+    public GridTHTDElement getCell(int rowIndex, GridColumnElement column) {
         if (!isRowInView(rowIndex)) {
             scrollToRow(rowIndex);
         }
 
-        GridRowElement row = getRow(rowIndex);
-        GridColumnElement column = getVisibleColumns().get(colIndex);
+        GridTRElement row = getRow(rowIndex);
         return row.getCell(column);
     }
 
@@ -50,14 +56,21 @@ public class GridElement extends TestBenchElement {
                 && rowIndex <= getLastVisibleRowIndex());
     }
 
-    public GridRowElement getRow(int rowIndex) {
+    public GridTRElement getRow(int rowIndex) {
         String script = "var rowsInDom = arguments[0].$.items.children;"
                 + "var rowInDom = Array.from(rowsInDom).filter(row => row.index == arguments[1])[0];"
                 + "return rowInDom;";
         return ((TestBenchElement) executeScript(script, this, rowIndex))
-                .wrap(GridRowElement.class);
+                .wrap(GridTRElement.class);
     }
 
+    /**
+     * Gets all columns defined for the grid, including any selection checkbox
+     * column.
+     *
+     * @return a list of grid column elements which can be used to refer to the
+     *         given column
+     */
     public List<GridColumnElement> getAllColumns() {
         String getVisibleColumnsJS = "return arguments[0]._getColumns().sort((a,b) => a._order - b._order)";
         List<TestBenchElement> elements = (List<TestBenchElement>) executeScript(
@@ -77,6 +90,29 @@ public class GridElement extends TestBenchElement {
 
     }
 
+    /**
+     * Gets the column with the given header text.
+     * <p>
+     * If multiple columns are found with the same header text, returns the
+     * first column.
+     *
+     * @param headerText
+     *            the text in the header
+     * @return the grid column element for the given column
+     * @throws NoSuchElementException
+     *             if no column was found
+     *
+     */
+    public GridColumnElement getColumn(String headerText)
+            throws NoSuchElementException {
+        return getAllColumns().stream().filter(
+                column -> headerText.equals(column.getHeaderCell().getText()))
+                .findFirst()
+                .orElseThrow(() -> new NoSuchElementException(
+                        "No column with header '" + headerText
+                                + "' was found"));
+    }
+
     public GridTHTDElement getHeaderCell(int columnIndex) {
         return getAllColumns().get(columnIndex).getHeaderCell();
     }
@@ -84,4 +120,28 @@ public class GridElement extends TestBenchElement {
     public TestBenchElement getFooterCell(int columnIndex) {
         return getAllColumns().get(columnIndex).getFooterCell();
     }
+
+    public void select(int rowIndex) {
+        if (isMultiselect()) {
+            getRow(rowIndex).select();
+        } else {
+            // https://github.com/vaadin/vaadin-grid-flow/issues/75
+            setActiveItem(getRow(rowIndex));
+        }
+    }
+
+    private void setActiveItem(GridTRElement row) {
+        executeScript("arguments[0].activeItem=arguments[1]._item", this, row);
+    }
+
+    private boolean isMultiselect() {
+        return (boolean) executeScript(
+                "return arguments[0]._getColumns().filter(col => typeof col.selectAll != 'undefined').length > 0",
+                this);
+    }
+
+    public void deselect(int rowIndex) {
+        getRow(rowIndex).deselect();
+    }
+
 }

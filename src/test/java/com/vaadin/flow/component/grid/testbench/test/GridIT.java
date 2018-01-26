@@ -18,7 +18,7 @@ public class GridIT extends AbstractIT {
 
     @Before
     public void find() {
-        header = $(GridElement.class).id(GridView.HEADER);
+        header = $(GridElement.class).id(GridView.HEADER_MULTISELECT);
         noHeader = $(GridElement.class).id(GridView.NO_HEADER);
         tenMillion = $(GridElement.class).id(GridView.TEN_MILLION);
     }
@@ -71,25 +71,28 @@ public class GridIT extends AbstractIT {
     @Test
     public void getAllColumns() {
         List<GridColumnElement> headerColumns = header.getAllColumns();
-        Assert.assertEquals(3, headerColumns.size());
+        Assert.assertEquals(4, headerColumns.size());
         List<GridColumnElement> noHeaderColumns = noHeader.getAllColumns();
         Assert.assertEquals(2, noHeaderColumns.size());
         List<GridColumnElement> tenMillionColumns = tenMillion.getAllColumns();
         Assert.assertEquals(2, tenMillionColumns.size());
 
+        Assert.assertEquals("", headerColumns.get(0).getHeaderCell().getText());
         Assert.assertEquals("First name",
-                headerColumns.get(0).getHeaderCell().getText());
-        Assert.assertEquals("Last name",
                 headerColumns.get(1).getHeaderCell().getText());
-        Assert.assertEquals("Age",
+        Assert.assertEquals("Last name",
                 headerColumns.get(2).getHeaderCell().getText());
+        Assert.assertEquals("Age",
+                headerColumns.get(3).getHeaderCell().getText());
+
+        Assert.assertEquals(headerColumns.get(0), header.getColumn(""));
     }
 
     @Test
     public void getHeaderCell() {
-        Assert.assertEquals("First name", header.getHeaderCell(0).getText());
-        Assert.assertEquals("Last name", header.getHeaderCell(1).getText());
-        Assert.assertEquals("Age", header.getHeaderCell(2).getText());
+        Assert.assertEquals("First name", header.getHeaderCell(1).getText());
+        Assert.assertEquals("Last name", header.getHeaderCell(2).getText());
+        Assert.assertEquals("Age", header.getHeaderCell(3).getText());
 
         // Header always exists but is hidden
         Assert.assertEquals("", noHeader.getHeaderCell(0).getText());
@@ -118,11 +121,11 @@ public class GridIT extends AbstractIT {
 
     @Test
     public void getCell() {
-        Assert.assertEquals("First Name 0", header.getCell(0, 0).getText());
+        Assert.assertEquals("First Name 0", header.getCell(0, 1).getText());
         Assert.assertEquals("First Name 0", noHeader.getCell(0, 0).getText());
         Assert.assertEquals("First Name 0", tenMillion.getCell(0, 0).getText());
 
-        Assert.assertEquals("Last name 20", header.getCell(20, 1).getText());
+        Assert.assertEquals("Last name 20", header.getCell(20, 2).getText());
         Assert.assertEquals("Last name 100",
                 noHeader.getCell(100, 1).getText());
         Assert.assertEquals("Last name 1000",
@@ -135,7 +138,68 @@ public class GridIT extends AbstractIT {
     @Test
     public void getRow() {
         Assert.assertEquals("Last name 5", header.getRow(5)
-                .getCell(header.getAllColumns().get(1)).getText());
+                .getCell(header.getAllColumns().get(2)).getText());
     }
 
+    @Test
+    public void singleSelect() {
+        Assert.assertFalse(noHeader.getRow(4).isSelected());
+        noHeader.select(4);
+        Assert.assertTrue(noHeader.getRow(4).isSelected());
+        // https://github.com/vaadin/vaadin-grid-flow/issues/74
+        // Assert.assertEquals(
+        // "1. Grid 'noheader' selection changed to 'Person [firstName=First
+        // Name 4, lastName=Last name 4, age=4]'",
+        // getLogRow(0));
+
+        noHeader.select(3);
+        Assert.assertFalse(noHeader.getRow(4).isSelected());
+        Assert.assertTrue(noHeader.getRow(3).isSelected());
+        Assert.assertEquals(
+                "2. Grid 'noheader' selection changed to 'Person [firstName=First Name 3, lastName=Last name 3, age=3]'",
+                getLogRow(0));
+
+        noHeader.select(3); // NO-OP
+        Assert.assertTrue(noHeader.getRow(3).isSelected());
+        Assert.assertEquals(
+                "2. Grid 'noheader' selection changed to 'Person [firstName=First Name 3, lastName=Last name 3, age=3]'",
+                getLogRow(0));
+
+        noHeader.deselect(3);
+        // https://github.com/vaadin/vaadin-grid-flow/issues/74
+        // Assert.assertFalse(noHeader.getRow(3).isSelected());
+        // Assert.assertEquals("3. Grid 'noheader' selection changed to '-'",
+        // getLogRow(0));
+    }
+
+    @Test
+    public void multiSelect() {
+        header.select(0);
+        Assert.assertTrue(header.getRow(0).isSelected());
+
+        // https://github.com/vaadin/vaadin-grid-flow/issues/74
+        // Assert.assertEquals(
+        // "1. Grid 'header' selection changed to 'Person [firstName=First Name
+        // 0, lastName=Last name 0, age=0]'",
+        // getLogRow(0));
+
+        header.select(1);
+        Assert.assertTrue(header.getRow(0).isSelected());
+        Assert.assertTrue(header.getRow(1).isSelected());
+        // https://github.com/vaadin/vaadin-grid-flow/issues/74
+        // Assert.assertEquals(
+        // "2. Grid 'header' selection changed to 'Person [firstName=First Name
+        // 0, lastName=Last name 0, age=0], Person [firstName=First Name 1,
+        // lastTName=Last name 0, age=0]'",
+        // getLogRow(0));
+
+        header.deselect(0);
+        Assert.assertFalse(header.getRow(0).isSelected());
+        Assert.assertTrue(header.getRow(1).isSelected());
+        // https://github.com/vaadin/vaadin-grid-flow/issues/74
+        // Assert.assertEquals(
+        // "3. Grid 'header' selection changed to 'Person [firstName=First Name
+        // 1, lastName=Last name 1, age=1]'",
+        // getLogRow(0));
+    }
 }
