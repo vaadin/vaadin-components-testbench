@@ -31,7 +31,7 @@ public class ComboBoxElement extends TestBenchElement
     public void selectByText(String text) {
         Boolean success = (Boolean) executeScript("var combobox = arguments[0];" //
                 + "var text = arguments[1];" //
-                + "var matches = combobox.items.filter(item => combobox._getItemLabel(item) == text);"
+                + "var matches = combobox.items.filter(function(item) {return combobox._getItemLabel(item) == text;});"
                 + "if (matches.length == 0) {" //
                 + "  return false;" //
                 + "} else {" //
@@ -51,7 +51,7 @@ public class ComboBoxElement extends TestBenchElement
                 + "if (!value) " //
                 + "  return '';" //
                 + "else " //
-                + "  return combobox._getItemLabel(combobox.items.filter(item => item.key == value)[0])",
+                + "  return combobox._getItemLabel(combobox.items.filter(function(item) { return item.key == value;})[0])",
                 this);
     }
 

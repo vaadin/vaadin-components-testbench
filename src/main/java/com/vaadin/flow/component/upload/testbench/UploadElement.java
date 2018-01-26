@@ -53,7 +53,7 @@ public class UploadElement extends TestBenchElement {
         String script = "var callback = arguments[arguments.length - 1];"
                 + "var upload = arguments[0];"
                 + "window.setTimeout(function() {"
-                + "  var inProgress = upload.files.filter(file => file.uploading).length >0;"
+                + "  var inProgress = upload.files.filter(function(file) { return file.uploading;}).length >0;"
                 + "  if (!inProgress) callback();" //
                 + "}, 500);";
         getCommandExecutor().getDriver().executeAsyncScript(script, this);
@@ -103,7 +103,7 @@ public class UploadElement extends TestBenchElement {
      */
     public void abort() {
         executeScript(
-                "arguments[0].files.forEach(file => arguments[0].dispatchEvent(new CustomEvent('file-abort', {detail: {file: file}})))",
+                "arguments[0].files.forEach(function(file) { return arguments[0].dispatchEvent(new CustomEvent('file-abort', {detail: {file: file}}));})",
                 this);
     }
 

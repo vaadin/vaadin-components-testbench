@@ -101,8 +101,10 @@ public class GridElement extends TestBenchElement {
     }
 
     public GridTRElement getRow(int rowIndex) {
-        String script = "var rowsInDom = arguments[0].$.items.children;"
-                + "var rowInDom = Array.from(rowsInDom).filter(row => row.index == arguments[1])[0];"
+        String script = "var grid = arguments[0];"
+                + "var rowIndex = arguments[1];"
+                + "var rowsInDom = grid.$.items.children;"
+                + "var rowInDom = Array.from(rowsInDom).filter(function(row) { return row.index == rowIndex;})[0];"
                 + "return rowInDom;";
         return ((TestBenchElement) executeScript(script, this, rowIndex))
                 .wrap(GridTRElement.class);
@@ -116,7 +118,7 @@ public class GridElement extends TestBenchElement {
      *         given column
      */
     public List<GridColumnElement> getAllColumns() {
-        String getVisibleColumnsJS = "return arguments[0]._getColumns().sort((a,b) => a._order - b._order)";
+        String getVisibleColumnsJS = "return arguments[0]._getColumns().sort(function(a,b) { return a._order - b._order;})";
         List<TestBenchElement> elements = (List<TestBenchElement>) executeScript(
                 getVisibleColumnsJS, this);
         return elements.stream()
@@ -125,7 +127,7 @@ public class GridElement extends TestBenchElement {
     }
 
     public List<GridColumnElement> getVisibleColumns() {
-        String getVisibleColumnsJS = "return arguments[0]._getColumns().filter(column => !column.hidden).sort((a,b) => a._order - b._order)";
+        String getVisibleColumnsJS = "return arguments[0]._getColumns().filter(function(column) {return !column.hidden;}).sort(function(a,b) { return a._order - b._order;})";
         List<TestBenchElement> elements = (List<TestBenchElement>) executeScript(
                 getVisibleColumnsJS, this);
         return elements.stream()
@@ -178,7 +180,7 @@ public class GridElement extends TestBenchElement {
 
     private boolean isMultiselect() {
         return (boolean) executeScript(
-                "return arguments[0]._getColumns().filter(col => typeof col.selectAll != 'undefined').length > 0",
+                "return arguments[0]._getColumns().filter(function(col) { return typeof col.selectAll != 'undefined';}).length > 0",
                 this);
     }
 

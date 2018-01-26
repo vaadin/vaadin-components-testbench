@@ -21,8 +21,10 @@ public class GridTRElement extends TestBenchElement {
 
     public GridTHTDElement getCell(GridColumnElement column) {
         TestBenchElement e = (TestBenchElement) executeScript(
-                "return Array.from(arguments[0].children)."
-                        + "filter(cell => cell._column == arguments[1])[0]",
+                "const grid = arguments[0];" //
+                        + "const column = arguments[1];" //
+                        + "return Array.from(grid.children)."
+                        + "filter(function(cell) { return cell._column == column;})[0]",
                 this, column);
         return e.wrap(GridTHTDElement.class);
     }
