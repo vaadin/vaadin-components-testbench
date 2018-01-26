@@ -62,13 +62,13 @@ public class ComboBoxIT extends AbstractIT {
     public void getPopupSuggestions() throws Exception {
         Assert.assertArrayEquals(
                 IntStream.range(0, 20).mapToObj(i -> "Item " + i).toArray(),
-                comboBoxWithNoText.getPopupSuggestions().toArray());
+                comboBoxWithNoText.getOptions().toArray());
         Assert.assertArrayEquals(
                 IntStream.range(0, 20).mapToObj(i -> "Item " + i).toArray(),
-                comboBoxWithText.getPopupSuggestions().toArray());
+                comboBoxWithText.getOptions().toArray());
         Assert.assertArrayEquals(
                 new String[] { "Doe, John", "Johnson, Jeff", "Meyer, Diana" },
-                comboBoxWithBeans.getPopupSuggestions().toArray());
+                comboBoxWithBeans.getOptions().toArray());
     }
 
     @Test
@@ -79,13 +79,13 @@ public class ComboBoxIT extends AbstractIT {
 
         comboBoxWithNoText.setFilter("2");
         Assert.assertArrayEquals(new String[] { "Item 2", "Item 12" },
-                comboBoxWithNoText.getPopupSuggestions().toArray());
+                comboBoxWithNoText.getOptions().toArray());
         comboBoxWithText.setFilter("2");
         Assert.assertArrayEquals(new String[] { "Item 2", "Item 12" },
-                comboBoxWithText.getPopupSuggestions().toArray());
+                comboBoxWithText.getOptions().toArray());
         comboBoxWithBeans.setFilter("Jo");
         Assert.assertArrayEquals(new String[] { "Doe, John", "Johnson, Jeff" },
-                comboBoxWithBeans.getPopupSuggestions().toArray());
+                comboBoxWithBeans.getOptions().toArray());
 
     }
 

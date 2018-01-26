@@ -5,11 +5,14 @@ import java.util.List;
 import org.jboss.weld.exceptions.IllegalArgumentException;
 
 import com.vaadin.flow.component.common.testbench.HasLabel;
+import com.vaadin.flow.component.common.testbench.HasSelectByText;
 import com.vaadin.testbench.TestBenchElement;
 import com.vaadin.testbench.elementsbase.Element;
 
 @Element("vaadin-combo-box")
-public class ComboBoxElement extends TestBenchElement implements HasLabel {
+public class ComboBoxElement extends TestBenchElement
+        implements HasLabel, HasSelectByText {
+    @Override
     public void selectByText(String text) {
         Boolean success = (Boolean) executeScript("var combobox = arguments[0];" //
                 + "var text = arguments[1];" //
@@ -26,6 +29,7 @@ public class ComboBoxElement extends TestBenchElement implements HasLabel {
         }
     }
 
+    @Override
     public String getSelectedText() {
         return (String) executeScript("var combobox = arguments[0];" //
                 + "var value = combobox.value;" //
@@ -44,7 +48,7 @@ public class ComboBoxElement extends TestBenchElement implements HasLabel {
         callFunction("close");
     }
 
-    public List<String> getPopupSuggestions() {
+    public List<String> getOptions() {
         openPopup();
         return (List<String>) executeScript("var combobox=arguments[0];" //
                 + "return combobox.filteredItems.map(function(item) { return combobox._getItemLabel(item);});",
