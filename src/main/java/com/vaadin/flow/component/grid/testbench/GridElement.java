@@ -49,6 +49,35 @@ public class GridElement extends TestBenchElement {
         return getCell(rowIndex, column);
     }
 
+    /**
+     * Find the first cell inside the rendered range with a text content
+     * matching the given string.
+     *
+     * @param contents
+     *            the string to look for
+     * @return a cell element containing the given string
+     * @throws NoSuchElementException
+     *             if no cell with the given string was found
+     */
+    public GridTHTDElement getCell(String contents)
+            throws NoSuchElementException {
+
+        String script = "const grid = arguments[0];"
+                + "const contents = arguments[1];"
+                + "const rowsInDom = Array.from(arguments[0].$.items.children);"
+                + "var tds = [];"
+                + "rowsInDom.forEach(function(tr) { Array.from(tr.children).forEach(function(td) { tds.push(td);})});"
+                + "return tds.find(function(td) { return td._content.textContent == contents});";
+        TestBenchElement td = (TestBenchElement) executeScript(script, this,
+                contents);
+        if (td == null) {
+            throw new NoSuchElementException(
+                    "No cell with text content '" + contents + "' found");
+        }
+
+        return td.wrap(GridTHTDElement.class);
+    }
+
     public GridTHTDElement getCell(int rowIndex, GridColumnElement column) {
         if (!isRowInView(rowIndex)) {
             scrollToRow(rowIndex);
@@ -140,7 +169,6 @@ public class GridElement extends TestBenchElement {
         if (isMultiselect()) {
             getRow(rowIndex).select();
         } else {
-            // https://github.com/vaadin/vaadin-grid-flow/issues/75
             setActiveItem(getRow(rowIndex));
         }
     }

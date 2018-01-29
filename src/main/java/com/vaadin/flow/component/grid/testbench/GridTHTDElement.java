@@ -29,7 +29,7 @@ public class GridTHTDElement extends TestBenchElement {
 
     /**
      * Gets the text content of the elements assigned to the given slot
-     * 
+     *
      * @param slot
      *            a <code>&lt;slot></code> element
      * @return the combined text content of all elements assigned to the given
@@ -42,5 +42,13 @@ public class GridTHTDElement extends TestBenchElement {
         content.forEach(element -> text.append(element.getText()));
 
         return text.toString();
+    }
+
+    public int getRow() {
+        return getPropertyInteger("parentElement", "index");
+    }
+
+    public GridColumnElement getColumn() {
+        return getPropertyElement("_column").wrap(GridColumnElement.class);
     }
 }

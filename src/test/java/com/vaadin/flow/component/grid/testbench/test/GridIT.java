@@ -20,10 +20,12 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.NoSuchElementException;
 
 import com.vaadin.flow.component.common.testbench.test.AbstractIT;
 import com.vaadin.flow.component.grid.testbench.GridColumnElement;
 import com.vaadin.flow.component.grid.testbench.GridElement;
+import com.vaadin.flow.component.grid.testbench.GridTHTDElement;
 
 public class GridIT extends AbstractIT {
 
@@ -216,5 +218,26 @@ public class GridIT extends AbstractIT {
         // "3. Grid 'header' selection changed to 'Person [firstName=First Name
         // 1, lastName=Last name 1, age=1]'",
         // getLogRow(0));
+    }
+
+    @Test
+    public void getCellByContents() {
+        GridTHTDElement cell = header.getCell("Last name 2");
+        Assert.assertEquals("Last name",
+                cell.getColumn().getHeaderCell().getText());
+        Assert.assertEquals(2, cell.getRow());
+
+        cell = header.getCell("15");
+        Assert.assertEquals("Age", cell.getColumn().getHeaderCell().getText());
+        Assert.assertEquals(15, cell.getRow());
+
+        cell = noHeader.getCell("First Name 12");
+        Assert.assertEquals("", cell.getColumn().getHeaderCell().getText());
+        Assert.assertEquals(12, cell.getRow());
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void getCellByContentsOutsideView() {
+        tenMillion.getCell("Last name 2000");
     }
 }
