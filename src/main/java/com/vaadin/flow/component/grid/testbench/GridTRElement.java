@@ -38,10 +38,6 @@ public class GridTRElement extends TestBenchElement {
         return hasAttribute("selected");
     }
 
-    private boolean hasAttribute(String attribute) {
-        return (boolean) callFunction("hasAttribute", attribute);
-    }
-
     /**
      * Selects the row if it is not already selected.
      */
