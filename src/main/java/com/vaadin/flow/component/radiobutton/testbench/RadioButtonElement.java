@@ -27,4 +27,8 @@ public class RadioButtonElement extends TestBenchElement {
     public String getValue() {
         return getPropertyString("value");
     }
+
+    public void setChecked(boolean checked) {
+        setProperty("checked", checked);
+    }
 }

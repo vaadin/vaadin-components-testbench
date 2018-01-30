@@ -44,7 +44,8 @@ public class RadioButtonGroupElement extends TestBenchElement
             throw new NoSuchElementException(
                     "No item with text '" + text + "' found");
         }
-        radioButton.get().click();
+
+        radioButton.get().setChecked(true);
     }
 
     @Override
