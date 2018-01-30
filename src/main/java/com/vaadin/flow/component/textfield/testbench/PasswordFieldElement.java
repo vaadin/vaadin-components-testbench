@@ -21,14 +21,33 @@ import com.vaadin.testbench.HasStringValueProperty;
 import com.vaadin.testbench.TestBenchElement;
 import com.vaadin.testbench.elementsbase.Element;
 
+/**
+ * A TestBench element representing a <code>&lt;vaadin-password-field&gt;</code>
+ * element.
+ */
 @Element("vaadin-password-field")
 public class PasswordFieldElement extends TestBenchElement
         implements HasStringValueProperty, HasLabel, HasPlaceholder {
 
+    /**
+     * Checks whether the password is shown in clear text or is hidden from
+     * view.
+     *
+     * @return <code>true</code> if the password is shown in clear text,
+     *         <code>false</code> if it is hidden from view
+     */
     public boolean isPasswordVisible() {
         return getPropertyBoolean("passwordVisible");
     }
 
+    /**
+     * Sets whether the password should be shown in clear text or be hidden from
+     * view.
+     *
+     * @param passwordVisible
+     *            <code>true</code> to show the password in clear text,
+     *            <code>false</code> to hide the passwors from view
+     */
     public void setPasswordVisible(boolean passwordVisible) {
         if (isPasswordVisible() != passwordVisible) {
             callFunction("_togglePasswordVisibility");

@@ -17,8 +17,18 @@ package com.vaadin.flow.component.grid.testbench;
 
 import com.vaadin.testbench.TestBenchElement;
 
+/**
+ * A TestBench element representing a <code>&lt;tr&gt;</code> element in a grid.
+ */
 public class GridTRElement extends TestBenchElement {
 
+    /**
+     * Gets the cell for the given column in this row.
+     *
+     * @param column
+     *            the column element
+     * @return the cell for the given column
+     */
     public GridTHTDElement getCell(GridColumnElement column) {
         TestBenchElement e = (TestBenchElement) executeScript(
                 "const grid = arguments[0];" //

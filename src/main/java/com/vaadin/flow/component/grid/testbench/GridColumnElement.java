@@ -18,13 +18,31 @@ package com.vaadin.flow.component.grid.testbench;
 import com.vaadin.testbench.TestBenchElement;
 import com.vaadin.testbench.elementsbase.Element;
 
+/**
+ * A TestBench element representing a <code>&lt;vaadin-grid-column&gt;</code>
+ * element.
+ */
 @Element("vaadin-grid-column")
 public class GridColumnElement extends TestBenchElement {
 
+    /**
+     * Gets the header cell for this column.
+     * <p>
+     * A column always has a header cell, even if the header is not shown.
+     *
+     * @return the header cell for the column
+     */
     public GridTHTDElement getHeaderCell() {
         return getPropertyElement("_headerCell").wrap(GridTHTDElement.class);
     }
 
+    /**
+     * Gets the footer cell for this column.
+     * <p>
+     * A column always has a footer cell, even if the footer is not shown.
+     *
+     * @return the footer cell for the column
+     */
     public GridTHTDElement getFooterCell() {
         return getPropertyElement("_footerCell").wrap(GridTHTDElement.class);
     }

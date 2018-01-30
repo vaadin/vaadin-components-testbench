@@ -17,8 +17,17 @@ package com.vaadin.flow.component.common.testbench;
 
 import com.vaadin.testbench.HasPropertySettersGetters;
 
+/**
+ * Implement by elements which support a placeholder, i.e. text shown when the
+ * field is empty.
+ */
 public interface HasPlaceholder extends HasPropertySettersGetters {
 
+    /**
+     * Gets the placeholder for the element.
+     *
+     * @return the placeholder or an empty string if there is no placeholder
+     */
     default public String getPlaceholder() {
         String ret = getPropertyString("placeholder");
         if (ret == null) {

@@ -18,9 +18,13 @@ package com.vaadin.flow.component.tabs.testbench;
 import com.vaadin.testbench.TestBenchElement;
 import com.vaadin.testbench.elementsbase.Element;
 
+/**
+ * A TestBench element representing a <code>&lt;vaadin-tab&gt;</code> element.
+ */
 @Element("vaadin-tab")
 public class TabElement extends TestBenchElement {
 
+    @Override
     public boolean isEnabled() {
         return !getPropertyBoolean("disabled");
     }

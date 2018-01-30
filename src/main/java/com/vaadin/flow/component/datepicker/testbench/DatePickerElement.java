@@ -21,14 +21,27 @@ import com.vaadin.flow.component.common.testbench.HasLabel;
 import com.vaadin.testbench.TestBenchElement;
 import com.vaadin.testbench.elementsbase.Element;
 
+/**
+ * A TestBench element representing a <code>&lt;vaadin-date-picker&gt;</code>
+ * element.
+ */
 @Element("vaadin-date-picker")
 public class DatePickerElement extends TestBenchElement implements HasLabel {
 
+    /**
+     * Clears the value of the date picker.
+     */
     @Override
     public void clear() {
         setDate(null);
     }
 
+    /**
+     * Selects the given date.
+     *
+     * @param date
+     *            the date to set
+     */
     public void setDate(LocalDate date) {
         if (date == null) {
             setValue("");
@@ -37,6 +50,11 @@ public class DatePickerElement extends TestBenchElement implements HasLabel {
         }
     }
 
+    /**
+     * Gets the selected date
+     *
+     * @return the selected date or <code>null</code> if no date is selected
+     */
     public LocalDate getDate() {
         String value = getValue();
         if (value.isEmpty()) {
@@ -45,10 +63,26 @@ public class DatePickerElement extends TestBenchElement implements HasLabel {
         return LocalDate.parse(value);
     }
 
+    /**
+     * Sets the selected date as a string.
+     * <p>
+     * The value is always in format <code>YYYY-MM-DD</code>.
+     *
+     * @param value
+     *            the value to set
+     */
     protected void setValue(String value) {
         setProperty("value", value);
     }
 
+    /**
+     * Gets the selected date as a string.
+     * <p>
+     * The value is always in format <code>YYYY-MM-DD</code>.
+     *
+     * @return the value of the date picker or an empty string if no date is
+     *         selected
+     */
     protected String getValue() {
         return getPropertyString("value");
     }

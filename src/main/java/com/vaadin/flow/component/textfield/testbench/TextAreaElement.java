@@ -21,6 +21,10 @@ import com.vaadin.testbench.HasStringValueProperty;
 import com.vaadin.testbench.TestBenchElement;
 import com.vaadin.testbench.elementsbase.Element;
 
+/**
+ * A TestBench element representing a <code>&lt;vaadin-text-area&gt;</code>
+ * element.
+ */
 @Element("vaadin-text-area")
 public class TextAreaElement extends TestBenchElement
         implements HasStringValueProperty, HasLabel, HasPlaceholder {

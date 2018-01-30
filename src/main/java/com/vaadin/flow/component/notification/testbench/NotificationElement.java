@@ -20,9 +20,19 @@ import org.openqa.selenium.SearchContext;
 import com.vaadin.testbench.TestBenchElement;
 import com.vaadin.testbench.elementsbase.Element;
 
+/**
+ * A TestBench element representing a <code>&lt;vaadin-notification&gt;</code>
+ * element.
+ */
 @Element("vaadin-notification")
 public class NotificationElement extends TestBenchElement {
 
+    /**
+     * Checks whether the notification is shown.
+     *
+     * @return <code>true</code> if the notification is shown,
+     *         <code>false</code> otherwise
+     */
     public boolean isOpen() {
         return getPropertyBoolean("opened");
     }
@@ -37,6 +47,11 @@ public class NotificationElement extends TestBenchElement {
         return getCard();
     }
 
+    /**
+     * Gets the card for the notification, which is where the content is added.
+     *
+     * @return the card for the notification
+     */
     private TestBenchElement getCard() {
         return getPropertyElement("_card");
     }

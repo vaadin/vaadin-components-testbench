@@ -27,25 +27,51 @@ import org.openqa.selenium.remote.RemoteWebElement;
 import com.vaadin.testbench.TestBenchElement;
 import com.vaadin.testbench.elementsbase.Element;
 
+/**
+ * A TestBench element representing a <code>&lt;vaadin-upload&gt;</code>
+ * element.
+ */
 @Element("vaadin-upload")
 public class UploadElement extends TestBenchElement {
 
+    /**
+     * Uploads the given local file and waits for 60s for the upload to finish.
+     *
+     * @param file
+     *            a reference to the local file to upload
+     */
     public void upload(File file) {
-        upload(file, true);
+        upload(file, 60);
     }
 
-    public void upload(File file, boolean waitForUploadToFinish) {
+    /**
+     * Uploads the given local file and waits for the given number of seconds
+     * for the upload to finish.
+     *
+     * @param file
+     *            the local file to upload
+     * @param maxSeconds
+     *            the number of seconds to wait for the upload to finish or
+     *            <code>0</code> not to wait
+     */
+    public void upload(File file, int maxSeconds) {
         if (isMaxFilesReached()) {
             removeFile(0);
         }
         WebElement uploadElement = setLocalFileDetector();
         uploadElement.sendKeys(file.getPath());
 
-        if (waitForUploadToFinish) {
-            waitForUploads(60);
+        if (maxSeconds > 0) {
+            waitForUploads(maxSeconds);
         }
     }
 
+    /**
+     * Wait for the given number of seconds for all uploads to finish.
+     *
+     * @param maxSeconds
+     *            the number of seconds to wait for the upload to finish
+     */
     private void waitForUploads(int maxSeconds) {
         Timeouts timeouts = getDriver().manage().timeouts();
         timeouts.setScriptTimeout(maxSeconds, TimeUnit.SECONDS);
@@ -66,10 +92,21 @@ public class UploadElement extends TestBenchElement {
                 this, i);
     }
 
+    /**
+     * Gets how many files can be uploaded.
+     *
+     * @return the number of files which can be uploaded
+     */
     public int getMaxFiles() {
         return getPropertyInteger("maxFiles");
     }
 
+    /**
+     * Checks whether the maximum number of files has been uploaded.
+     *
+     * @return <code>true</code> if no more files can be uploaded,
+     *         <code>false</code> otherwise
+     */
     public boolean isMaxFilesReached() {
         return getPropertyBoolean("maxFilesReached");
     }

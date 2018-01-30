@@ -24,9 +24,14 @@ import com.vaadin.flow.component.common.testbench.HasSelectByText;
 import com.vaadin.testbench.TestBenchElement;
 import com.vaadin.testbench.elementsbase.Element;
 
+/**
+ * A TestBench element representing a <code>&lt;vaadin-combo-box&gt;</code>
+ * element.
+ */
 @Element("vaadin-combo-box")
 public class ComboBoxElement extends TestBenchElement
         implements HasLabel, HasSelectByText {
+
     @Override
     public void selectByText(String text) {
         Boolean success = (Boolean) executeScript("var combobox = arguments[0];" //
@@ -55,14 +60,36 @@ public class ComboBoxElement extends TestBenchElement
                 this);
     }
 
+    /**
+     * Opens the popup with options, if it is not already open.
+     */
     public void openPopup() {
         callFunction("open");
     }
 
+    /**
+     * Close the popup with options, if it is open.
+     */
     public void closePopup() {
         callFunction("close");
     }
 
+    /**
+     * Checks whether the popup with options is open.
+     *
+     * @return <code>true</code> if the popup is open, <code>false</code>
+     *         otherwiseF
+     */
+    public boolean isPopupOpen() {
+        return getPropertyBoolean("opened");
+    }
+
+    /**
+     * Gets a list of all available options.
+     *
+     * @return a list of the options (visible text)
+     */
+    @SuppressWarnings("unchecked")
     public List<String> getOptions() {
         openPopup();
         return (List<String>) executeScript("var combobox=arguments[0];" //
@@ -70,14 +97,21 @@ public class ComboBoxElement extends TestBenchElement
                 this);
     }
 
-    public boolean isPopupOpen() {
-        return getPropertyBoolean("opened");
-    }
-
+    /**
+     * Sets the filter for the options in the popup.
+     *
+     * @param filter
+     *            the filter to use for filtering options
+     */
     public void setFilter(String filter) {
         setProperty("filter", filter);
     }
 
+    /**
+     * Gets the filter for the options in the popup.
+     *
+     * @return the filter to use for filtering options
+     */
     public String getFilter() {
         return getPropertyString("filter");
     }

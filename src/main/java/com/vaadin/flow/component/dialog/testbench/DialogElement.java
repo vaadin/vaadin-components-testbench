@@ -20,17 +20,33 @@ import org.openqa.selenium.SearchContext;
 import com.vaadin.testbench.TestBenchElement;
 import com.vaadin.testbench.elementsbase.Element;
 
+/**
+ * A TestBench element representing a <code>&lt;vaadin-dialog&gt;</code>
+ * element.
+ */
 @Element("vaadin-dialog")
 public class DialogElement extends TestBenchElement {
 
+    /**
+     * Shows the dialog.
+     */
     public void open() {
         setProperty("opened", true);
     }
 
+    /**
+     * Hides the dialog.
+     */
     public void close() {
         setProperty("opened", false);
     }
 
+    /**
+     * Checks whether the dialog is shown.
+     *
+     * @return <code>true</code> if the dialog is shown, <code>false</code>
+     *         otherwise
+     */
     public boolean isOpen() {
         return getPropertyBoolean("opened");
     }
@@ -41,6 +57,14 @@ public class DialogElement extends TestBenchElement {
         return getOverlay();
     }
 
+    /**
+     * Gets the overlay element connected to the dialog.
+     * <p>
+     * The overlay contains the content of the dialog but is not a child element
+     * of the dialog element.
+     *
+     * @return the overlay element
+     */
     private TestBenchElement getOverlay() {
         return getPropertyElement("$", "overlay");
     }

@@ -19,6 +19,10 @@ import java.util.List;
 
 import com.vaadin.testbench.TestBenchElement;
 
+/**
+ * A TestBench element representing a <code>&lt;td&gt;</code> or
+ * <code>&lt;th&gt;</code> element in a grid.
+ */
 public class GridTHTDElement extends TestBenchElement {
 
     @Override
@@ -44,10 +48,20 @@ public class GridTHTDElement extends TestBenchElement {
         return text.toString();
     }
 
+    /**
+     * Gets the row index for this grid cell.
+     *
+     * @return the row index
+     */
     public int getRow() {
         return getPropertyInteger("parentElement", "index");
     }
 
+    /**
+     * Gets the column for this grid cell.
+     *
+     * @return the column element
+     */
     public GridColumnElement getColumn() {
         return getPropertyElement("_column").wrap(GridColumnElement.class);
     }
