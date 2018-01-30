@@ -145,11 +145,10 @@ public class GridElement extends TestBenchElement {
      * @return the grid column element for the given column
      * @throws NoSuchElementException
      *             if no column was found
-     *
      */
     public GridColumnElement getColumn(String headerText)
             throws NoSuchElementException {
-        return getAllColumns().stream().filter(
+        return getVisibleColumns().stream().filter(
                 column -> headerText.equals(column.getHeaderCell().getText()))
                 .findFirst()
                 .orElseThrow(() -> new NoSuchElementException(
@@ -158,11 +157,11 @@ public class GridElement extends TestBenchElement {
     }
 
     public GridTHTDElement getHeaderCell(int columnIndex) {
-        return getAllColumns().get(columnIndex).getHeaderCell();
+        return getVisibleColumns().get(columnIndex).getHeaderCell();
     }
 
     public TestBenchElement getFooterCell(int columnIndex) {
-        return getAllColumns().get(columnIndex).getFooterCell();
+        return getVisibleColumns().get(columnIndex).getFooterCell();
     }
 
     public void select(int rowIndex) {
