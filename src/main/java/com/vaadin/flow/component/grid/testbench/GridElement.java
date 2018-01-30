@@ -53,10 +53,10 @@ public class GridElement extends TestBenchElement {
      *
      * @return the index of the first visible row
      */
-    public long getFirstVisibleRowIndex() {
-        return (long) executeScript(
+    public int getFirstVisibleRowIndex() {
+        return ((Long) executeScript(
                 "return arguments[0]._firstVisibleIndex+arguments[0]._vidxOffset",
-                this);
+                this)).intValue();
     }
 
     /**
@@ -64,8 +64,8 @@ public class GridElement extends TestBenchElement {
      *
      * @return the number of rows
      */
-    public long getRowCount() {
-        return getPropertyDouble("_effectiveSize").longValue();
+    public int getRowCount() {
+        return getPropertyDouble("_effectiveSize").intValue();
     }
 
     /**
@@ -140,11 +140,11 @@ public class GridElement extends TestBenchElement {
      *
      * @return the index of the last visible row
      */
-    private long getLastVisibleRowIndex() {
+    private int getLastVisibleRowIndex() {
         // Private for now because this seems to be slightly incorrect
-        return (long) executeScript(
+        return ((Long) executeScript(
                 "return arguments[0]._lastVisibleIndex+arguments[0]._vidxOffset",
-                this);
+                this)).intValue();
     }
 
     /**
