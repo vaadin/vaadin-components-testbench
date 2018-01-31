@@ -24,6 +24,14 @@
             <id>vaadin-addons</id>
             <url>http://maven.vaadin.com/vaadin-addons</url>
         </pluginRepository>
+        <pluginRepository>
+            <id>vaadin-prereleases</id>
+            <url>http://maven.vaadin.com/vaadin-prereleases</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>vaadin-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/vaadin-snapshots</url>
+        </pluginRepository>
     </pluginRepositories>
     <repositories>
         <repository>
@@ -41,10 +49,10 @@
     </repositories>
 
     <modules>
-    	<module>vaadin-components-testbench</module>
-    	<module>vaadin-components-testbench-test</module>
+        <module>vaadin-components-testbench</module>
+        <module>vaadin-components-testbench-test</module>
     </modules>
-    
+
     <dependencies>
         <!-- You must download and run the DCEVM installer for your JDK version 
             from https://github.com/dcevm/dcevm/releases before using Hotswap Agent. 

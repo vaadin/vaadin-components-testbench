@@ -39,15 +39,15 @@ public class UploadView extends AbstractView {
             };
         });
         upload.addStartedListener(e -> {
-            log("Upload of " + e.getFilename() + " of size "
+            log("Upload of " + e.getFileName() + " of size "
                     + e.getContentLength() + " started");
         });
         upload.addSucceededListener(e -> {
-            log("File " + e.getFileName() + " of size " + e.getLength()
+            log("File " + e.getFileName() + " of size " + e.getContentLength()
                     + " received");
         });
         upload.addFailedListener(e -> {
-            log("File " + e.getFileName() + " of size " + e.getLength()
+            log("File " + e.getFileName() + " of size " + e.getContentLength()
                     + " failed");
         });
 

@@ -32,13 +32,13 @@ public class ProgressBarView extends AbstractView {
         ProgressBar progressBar = new ProgressBar();
         progressBar.setId(DEFAULT);
         progressBar.setWidth("200px");
-        progressBar.setValue(0.75d);
+        progressBar.setValue(7);
         add(progressBar);
 
-        progressBar = new ProgressBar(0.0, 100.0);
+        progressBar = new ProgressBar(0, 100);
         progressBar.setId(HUNDRED);
         progressBar.setWidth("200px");
-        progressBar.setValue(22d);
+        progressBar.setValue(22);
         add(progressBar);
     }
 
