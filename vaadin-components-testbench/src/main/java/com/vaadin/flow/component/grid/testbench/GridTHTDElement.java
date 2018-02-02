@@ -35,7 +35,7 @@ public class GridTHTDElement extends TestBenchElement {
      * Gets the text content of the elements assigned to the given slot
      *
      * @param slot
-     *            a <code>&lt;slot></code> element
+     *            a <code>&lt;slot&gt;</code> element
      * @return the combined text content of all elements assigned to the given
      *         slot
      */

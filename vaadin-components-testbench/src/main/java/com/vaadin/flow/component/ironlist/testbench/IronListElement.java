@@ -27,11 +27,11 @@ public class IronListElement extends TestBenchElement {
     /**
      * Scrolls to the row with the given index.
      *
-     * @param row
+     * @param rowIndex
      *            the row to scroll to
      */
-    public void scrollToRow(int row) {
-        callFunction("scrollToIndex", row);
+    public void scrollToRow(int rowIndex) {
+        callFunction("scrollToIndex", rowIndex);
     }
 
     /**
@@ -60,9 +60,9 @@ public class IronListElement extends TestBenchElement {
      * @return <code>true</code> if the row is at least partially in view,
      *         <code>false</code> otherwise
      */
-    public boolean isRowInView(int index) {
-        return getFirstVisibleRowIndex() <= index
-                && index <= getLastVisibleRowIndex();
+    public boolean isRowInView(int rowIndex) {
+        return getFirstVisibleRowIndex() <= rowIndex
+                && rowIndex <= getLastVisibleRowIndex();
     }
 
     /**
