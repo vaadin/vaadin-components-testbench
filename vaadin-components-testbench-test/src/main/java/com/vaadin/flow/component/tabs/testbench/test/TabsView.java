@@ -40,7 +40,7 @@ public class TabsView extends AbstractView {
         tabs.addSelectedChangeListener(e -> log(
                 "Tab '" + e.getSource().getSelectedIndex() + "' selected"));
         Tab disabledTab = new Tab("Disabled");
-        disabledTab.setDisabled(true);
+        disabledTab.setEnabled(false);
 
         tabs.add(componentTab, disabledTab, textTab);
         add(tabs);

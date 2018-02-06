@@ -35,7 +35,7 @@ public class ProgressBarIT extends AbstractIT {
 
     @Test
     public void getValue() throws Exception {
-        Assert.assertEquals(0.75, def.getValue(), 0.001);
+        Assert.assertEquals(7, def.getValue(), 0.001);
         Assert.assertEquals(22, hundred.getValue(), 0.001);
     }
 
