@@ -45,14 +45,16 @@ public class TextAreaIT extends AbstractIT {
         Assert.assertEquals("", placeholder.getValue());
 
         label.setValue("Foo");
-        nolabel.setValue("Foo");
-        initialValue.setValue("Foo");
-        placeholder.setValue("Foo");
+        assertStringValue(label, "Foo");
 
-        Assert.assertEquals("Foo", label.getValue());
-        Assert.assertEquals("Foo", nolabel.getValue());
-        Assert.assertEquals("Foo", initialValue.getValue());
-        Assert.assertEquals("Foo", placeholder.getValue());
+        nolabel.setValue("Foo");
+        assertStringValue(nolabel, "Foo");
+
+        initialValue.setValue("Foo");
+        assertStringValue(initialValue, "Foo");
+
+        placeholder.setValue("Foo");
+        assertStringValue(placeholder, "Foo");
     }
 
     @Test

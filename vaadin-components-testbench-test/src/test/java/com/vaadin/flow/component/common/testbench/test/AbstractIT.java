@@ -18,10 +18,13 @@ package com.vaadin.flow.component.common.testbench.test;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+import com.vaadin.flow.component.common.testbench.HasLabel;
+import com.vaadin.testbench.HasStringValueProperty;
 import com.vaadin.testbench.annotations.BrowserConfiguration;
 import com.vaadin.testbench.parallel.BrowserUtil;
 
@@ -30,6 +33,10 @@ public abstract class AbstractIT extends AbstractParallelSauceLabsTest {
     protected String getLogRow(int i) {
         return findElement(By.id("log")).findElements(By.tagName("div")).get(i)
                 .getText();
+    }
+
+    protected String getLogRowWithoutNumber(int i) {
+        return getLogRow(i).replaceFirst(".*\\. ", "");
     }
 
     @BrowserConfiguration
@@ -44,6 +51,14 @@ public abstract class AbstractIT extends AbstractParallelSauceLabsTest {
 
     private String getTestPath() {
         return getClass().getSimpleName().replaceAll("IT$", "");
+    }
+
+    protected <T extends HasStringValueProperty & HasLabel> void assertStringValue(
+            T element, String expectedValue) {
+        Assert.assertEquals(expectedValue, element.getValue());
+        Assert.assertEquals(
+                "Value of '" + element.getLabel() + "' is now " + expectedValue,
+                getLogRowWithoutNumber(0));
     }
 
 }
