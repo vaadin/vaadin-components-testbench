@@ -17,6 +17,8 @@ package com.vaadin.flow.component.grid.testbench;
 
 import java.util.List;
 
+import org.openqa.selenium.NoSuchElementException;
+
 import com.vaadin.testbench.TestBenchElement;
 
 /**
@@ -27,8 +29,11 @@ public class GridTHTDElement extends TestBenchElement {
 
     @Override
     public String getText() {
-        TestBenchElement slot = getPropertyElement("firstElementChild");
-        return getSlotText(slot);
+        return (String) executeScript("var cell = arguments[0];"
+                + "return Array.from(cell.firstElementChild.assignedNodes()).map(function(node) { return node.textContent;}).join('');",
+                this);
+        // TestBenchElement slot = getPropertyElement("firstElementChild");
+        // return getSlotText(slot);
     }
 
     /**
@@ -63,6 +68,27 @@ public class GridTHTDElement extends TestBenchElement {
      * @return the column element
      */
     public GridColumnElement getColumn() {
-        return getPropertyElement("_column").wrap(GridColumnElement.class);
+        Double id = getPropertyDouble("_column", "__generatedTbId");
+        GridElement grid = getGrid();
+        if (id == null) {
+            grid.generatedColumnIdsIfNeeded();
+            id = getPropertyDouble("_column", "__generatedTbId");
+        }
+        if (id == null) {
+            throw new NoSuchElementException(
+                    "Unable to find column. This should not really happen.");
+        }
+        return new GridColumnElement(id.longValue(), grid);
+    }
+
+    /**
+     * Gets the grid containing this element.
+     *
+     * @return the grid for this element
+     */
+    public GridElement getGrid() {
+        return ((TestBenchElement) executeScript(
+                "return arguments[0].getRootNode().host", this))
+                        .wrap(GridElement.class);
     }
 }

@@ -32,10 +32,10 @@ public class GridTRElement extends TestBenchElement {
     public GridTHTDElement getCell(GridColumnElement column) {
         TestBenchElement e = (TestBenchElement) executeScript(
                 "const grid = arguments[0];" //
-                        + "const column = arguments[1];" //
+                        + "const columnId = arguments[1];" //
                         + "return Array.from(grid.children)."
-                        + "filter(function(cell) { return cell._column == column;})[0]",
-                this, column);
+                        + "filter(function(cell) { return cell._column.__generatedTbId == columnId;})[0]",
+                this, column.get__generatedId());
         return e.wrap(GridTHTDElement.class);
     }
 

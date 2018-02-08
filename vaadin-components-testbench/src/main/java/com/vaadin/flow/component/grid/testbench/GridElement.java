@@ -124,7 +124,8 @@ public class GridElement extends TestBenchElement {
                 + "const rowsInDom = Array.from(arguments[0].$.items.children);"
                 + "var tds = [];"
                 + "rowsInDom.forEach(function(tr) { Array.from(tr.children).forEach(function(td) { tds.push(td);})});"
-                + "return tds.find(function(td) { return td._content.textContent == contents});";
+                + "const matches = tds.filter(function(td) { return td._content.textContent == contents});"
+                + "return matches.length ? matches[0] : null;";
         TestBenchElement td = (TestBenchElement) executeScript(script, this,
                 contents);
         if (td == null) {
@@ -186,13 +187,29 @@ public class GridElement extends TestBenchElement {
      *         given column
      */
     public List<GridColumnElement> getAllColumns() {
-        String getVisibleColumnsJS = "return arguments[0]._getColumns().sort(function(a,b) { return a._order - b._order;})";
+        generatedColumnIdsIfNeeded();
+        String getVisibleColumnsJS = "return arguments[0]._getColumns().sort(function(a,b) { return a._order - b._order;}).map(function(column) { return column.__generatedTbId;});";
         @SuppressWarnings("unchecked")
-        List<TestBenchElement> elements = (List<TestBenchElement>) executeScript(
-                getVisibleColumnsJS, this);
+        List<Long> elements = (List<Long>) executeScript(getVisibleColumnsJS,
+                this);
         return elements.stream()
-                .map(element -> element.wrap(GridColumnElement.class))
+                .map(generatedId -> new GridColumnElement(generatedId, this))
                 .collect(Collectors.toList());
+    }
+
+    protected void generatedColumnIdsIfNeeded() {
+        String generateIds = "const grid = arguments[0];"
+                + "if (!grid.__generatedTbId) {"//
+                + "  grid.__generatedTbId = 1;"//
+                + "}" //
+                + "grid._getColumns().forEach(function(column) {"
+                + "  if (!column.__generatedTbId) {"
+                + "    column.__generatedTbId = grid.__generatedTbId++;" //
+                + "  }" //
+                + "});";
+
+        executeScript(generateIds, this);
+        //
     }
 
     /**
@@ -203,11 +220,11 @@ public class GridElement extends TestBenchElement {
      *         given column
      */
     public List<GridColumnElement> getVisibleColumns() {
-        String getVisibleColumnsJS = "return arguments[0]._getColumns().filter(function(column) {return !column.hidden;}).sort(function(a,b) { return a._order - b._order;})";
-        List<TestBenchElement> elements = (List<TestBenchElement>) executeScript(
-                getVisibleColumnsJS, this);
-        return elements.stream()
-                .map(element -> element.wrap(GridColumnElement.class))
+        generatedColumnIdsIfNeeded();
+        String getVisibleColumnsJS = "return arguments[0]._getColumns().filter(function(column) {return !column.hidden;}).sort(function(a,b) { return a._order - b._order;}).map(function(column) { return column.__generatedTbId;});";
+        List<Long> elements = (List<Long>) executeScript(getVisibleColumnsJS,
+                this);
+        return elements.stream().map(id -> new GridColumnElement(id, this))
                 .collect(Collectors.toList());
 
     }
