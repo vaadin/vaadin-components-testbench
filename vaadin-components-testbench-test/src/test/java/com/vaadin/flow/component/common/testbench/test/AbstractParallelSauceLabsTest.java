@@ -61,13 +61,18 @@ public abstract class AbstractParallelSauceLabsTest extends ParallelTest {
 
     @Override
     protected Browser getRunLocallyBrowser() {
+        Browser localBrowser = super.getRunLocallyBrowser();
+        if (localBrowser != null) {
+            return localBrowser;
+        }
+
         if (getSauceUser() == null) {
             System.err.println(
                     "No Sauce Labs user given using -Dsauce.user=<username>. Running on local Chrome");
             return Browser.CHROME;
-        } else {
-            return super.getRunLocallyBrowser();
         }
+
+        return null;
     }
 
 }
