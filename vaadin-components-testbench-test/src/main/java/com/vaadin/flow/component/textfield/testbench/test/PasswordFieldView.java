@@ -15,6 +15,7 @@
  */
 package com.vaadin.flow.component.textfield.testbench.test;
 
+import com.vaadin.flow.component.HasValue.ValueChangeEvent;
 import com.vaadin.flow.component.common.testbench.test.AbstractView;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.router.Route;
@@ -34,23 +35,35 @@ public class PasswordFieldView extends AbstractView {
 
         PasswordField passwordFieldNoLabel = new PasswordField();
         passwordFieldNoLabel.setId(NOLABEL);
+        passwordFieldNoLabel.addValueChangeListener(this::onValueChange);
         add(passwordFieldNoLabel);
 
         PasswordField passwordFieldLabel = new PasswordField("Label");
         passwordFieldLabel.setId(LABEL);
+        passwordFieldLabel.addValueChangeListener(this::onValueChange);
         add(passwordFieldLabel);
 
         PasswordField passwordFieldInitialValue = new PasswordField(
                 "Has an initial value");
         passwordFieldInitialValue.setId(INITIAL_VALUE);
         passwordFieldInitialValue.setValue("Initial");
+        passwordFieldInitialValue.addValueChangeListener(this::onValueChange);
         add(passwordFieldInitialValue);
 
         PasswordField passwordFieldPlaceholder = new PasswordField(
                 "Has a placeholder");
         passwordFieldPlaceholder.setId(PLACEHOLDER);
         passwordFieldPlaceholder.setPlaceholder("Text goes here");
+        passwordFieldPlaceholder.addValueChangeListener(this::onValueChange);
         add(passwordFieldPlaceholder);
+    }
+
+    protected void onValueChange(ValueChangeEvent<PasswordField, String> e) {
+        String label = e.getSource().getLabel();
+        if (label == null) {
+            label = "";
+        }
+        log("Value of '" + label + "' is now " + e.getValue());
     }
 
 }

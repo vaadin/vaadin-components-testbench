@@ -15,6 +15,8 @@
  */
 package com.vaadin.flow.component.textfield.testbench;
 
+import org.openqa.selenium.Keys;
+
 import com.vaadin.flow.component.common.testbench.HasLabel;
 import com.vaadin.flow.component.common.testbench.HasPlaceholder;
 import com.vaadin.testbench.HasStringValueProperty;
@@ -52,6 +54,16 @@ public class PasswordFieldElement extends TestBenchElement
         if (isPasswordVisible() != passwordVisible) {
             callFunction("_togglePasswordVisibility");
         }
+    }
+
+    @Override
+    public void setValue(String string) {
+        HasStringValueProperty.super.setValue(string);
+        getInputElement().sendKeys(Keys.TAB);
+    }
+
+    private TestBenchElement getInputElement() {
+        return $(TestBenchElement.class).attribute("part", "value").first();
     }
 
 }

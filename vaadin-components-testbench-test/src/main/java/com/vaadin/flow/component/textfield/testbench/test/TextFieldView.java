@@ -15,6 +15,7 @@
  */
 package com.vaadin.flow.component.textfield.testbench.test;
 
+import com.vaadin.flow.component.HasValue.ValueChangeEvent;
 import com.vaadin.flow.component.common.testbench.test.AbstractView;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
@@ -34,21 +35,34 @@ public class TextFieldView extends AbstractView {
 
         TextField textfieldNoLabel = new TextField();
         textfieldNoLabel.setId(NOLABEL);
+        textfieldNoLabel.addValueChangeListener(this::onValueChange);
+
         add(textfieldNoLabel);
 
         TextField textfieldLabel = new TextField("Label");
         textfieldLabel.setId(LABEL);
+        textfieldLabel.addValueChangeListener(this::onValueChange);
         add(textfieldLabel);
 
         TextField textfieldInitialValue = new TextField("Has an initial value");
         textfieldInitialValue.setId(INITIAL_VALUE);
         textfieldInitialValue.setValue("Initial");
+        textfieldInitialValue.addValueChangeListener(this::onValueChange);
         add(textfieldInitialValue);
 
         TextField textfieldPlaceholder = new TextField("Has a placeholder");
         textfieldPlaceholder.setId(PLACEHOLDER);
         textfieldPlaceholder.setPlaceholder("Text goes here");
+        textfieldPlaceholder.addValueChangeListener(this::onValueChange);
         add(textfieldPlaceholder);
+    }
+
+    protected void onValueChange(ValueChangeEvent<TextField, String> e) {
+        String label = e.getSource().getLabel();
+        if (label == null) {
+            label = "";
+        }
+        log("Value of '" + label + "' is now " + e.getValue());
     }
 
 }
