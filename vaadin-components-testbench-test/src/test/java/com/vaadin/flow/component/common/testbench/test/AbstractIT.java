@@ -41,7 +41,7 @@ public abstract class AbstractIT extends AbstractParallelSauceLabsTest {
 
     @BrowserConfiguration
     public List<DesiredCapabilities> getBrowserConfiguration() {
-        return Arrays.asList(BrowserUtil.chrome());
+        return Arrays.asList(BrowserUtil.safari());
     }
 
     @Before
