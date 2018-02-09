@@ -24,5 +24,10 @@ import com.vaadin.testbench.elementsbase.Element;
  */
 @Element("vaadin-button")
 public class ButtonElement extends TestBenchElement {
-
+    @Override
+    public String getText() {
+        // The default implementation seems to use innerText, which adds a lot
+        // of whitespace in Edge
+        return getPropertyString("textContent");
+    }
 }

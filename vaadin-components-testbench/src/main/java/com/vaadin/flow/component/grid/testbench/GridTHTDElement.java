@@ -29,11 +29,14 @@ public class GridTHTDElement extends TestBenchElement {
 
     @Override
     public String getText() {
-        return (String) executeScript("var cell = arguments[0];"
+        String text = (String) executeScript("var cell = arguments[0];"
                 + "return Array.from(cell.firstElementChild.assignedNodes()).map(function(node) { return node.textContent;}).join('');",
                 this);
-        // TestBenchElement slot = getPropertyElement("firstElementChild");
-        // return getSlotText(slot);
+        if (text.trim().isEmpty()) {
+            return "";
+        } else {
+            return text;
+        }
     }
 
     /**
