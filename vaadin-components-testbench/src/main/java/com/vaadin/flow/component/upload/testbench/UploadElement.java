@@ -37,6 +37,8 @@ public class UploadElement extends TestBenchElement {
 
     /**
      * Uploads the given local file and waits for 60s for the upload to finish.
+     * <p>
+     * Note that Safari webdriver does not support file uploads.
      *
      * @param file
      *            a reference to the local file to upload
@@ -48,6 +50,8 @@ public class UploadElement extends TestBenchElement {
     /**
      * Uploads the given local file and waits for the given number of seconds
      * for the upload to finish.
+     * <p>
+     * Note that Safari webdriver does not support file uploads.
      *
      * @param file
      *            the local file to upload

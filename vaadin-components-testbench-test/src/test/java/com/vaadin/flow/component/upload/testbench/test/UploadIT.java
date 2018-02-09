@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 import org.hamcrest.core.StringContains;
 import org.hamcrest.core.StringEndsWith;
@@ -26,9 +27,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import com.vaadin.flow.component.common.testbench.test.AbstractIT;
 import com.vaadin.flow.component.upload.testbench.UploadElement;
+import com.vaadin.testbench.parallel.BrowserUtil;
 
 public class UploadIT extends AbstractIT {
 
@@ -37,6 +40,13 @@ public class UploadIT extends AbstractIT {
     @Before
     public void find() {
         upload = $(UploadElement.class).first();
+    }
+
+    @Override
+    public List<DesiredCapabilities> getBrowserConfiguration() {
+        List<DesiredCapabilities> browsers = super.getBrowserConfiguration();
+        browsers.remove(BrowserUtil.safari());
+        return browsers;
     }
 
     @Test
