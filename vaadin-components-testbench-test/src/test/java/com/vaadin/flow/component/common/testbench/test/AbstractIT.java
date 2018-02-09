@@ -15,8 +15,9 @@
  */
 package com.vaadin.flow.component.common.testbench.test;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -26,6 +27,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import com.vaadin.flow.component.common.testbench.HasLabel;
 import com.vaadin.testbench.HasStringValueProperty;
 import com.vaadin.testbench.annotations.BrowserConfiguration;
+import com.vaadin.testbench.parallel.Browser;
 import com.vaadin.testbench.parallel.BrowserUtil;
 
 public abstract class AbstractIT extends AbstractParallelSauceLabsTest {
@@ -41,7 +43,18 @@ public abstract class AbstractIT extends AbstractParallelSauceLabsTest {
 
     @BrowserConfiguration
     public List<DesiredCapabilities> getBrowserConfiguration() {
-        return Arrays.asList(BrowserUtil.chrome());
+        String browsers = System.getenv("BROWSERS");
+        List<DesiredCapabilities> finalList = new ArrayList<>();
+        if (browsers != null) {
+            for (String browserName : browsers.split(",")) {
+                Browser browser = Browser.valueOf(
+                        browserName.toUpperCase(Locale.ENGLISH).trim());
+                finalList.add(browser.getDesiredCapabilities());
+            }
+        } else {
+            finalList.add(BrowserUtil.chrome());
+        }
+        return finalList;
     }
 
     @Before
