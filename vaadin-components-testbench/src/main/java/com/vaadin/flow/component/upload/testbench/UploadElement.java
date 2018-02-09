@@ -26,6 +26,7 @@ import org.openqa.selenium.remote.RemoteWebElement;
 
 import com.vaadin.testbench.TestBenchElement;
 import com.vaadin.testbench.elementsbase.Element;
+import com.vaadin.testbench.parallel.BrowserUtil;
 
 /**
  * A TestBench element representing a <code>&lt;vaadin-upload&gt;</code>
@@ -58,8 +59,20 @@ public class UploadElement extends TestBenchElement {
         if (isMaxFilesReached()) {
             removeFile(0);
         }
-        WebElement uploadElement = setLocalFileDetector();
+        TestBenchElement uploadElement = setLocalFileDetector();
+
+        // Element must be focusable for Edge and Firefox
+        Boolean hidden = uploadElement.getPropertyBoolean("hidden");
+        uploadElement.setProperty("hidden", false);
+
+        if (!BrowserUtil.isEdge(getCapabilities())) {
+            // Firefox uploads the previous file again without this
+            // Edge throws "InvalidElementStateException: The element is not
+            // editable"
+            uploadElement.clear();
+        }
         uploadElement.sendKeys(file.getPath());
+        uploadElement.setProperty("hidden", hidden);
 
         if (maxSeconds > 0) {
             waitForUploads(maxSeconds);
