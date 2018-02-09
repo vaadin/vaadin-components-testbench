@@ -17,7 +17,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <sauce.options>--tunnel-identifier ${maven.build.timestamp}</sauce.options>
-        <flow.version>1.0.0.alpha19</flow.version>
+        <flow.version>1.0.0.alpha20</flow.version>
         <ci-sauce.version>1.132</ci-sauce.version>
         <maven.deploy.skip>true</maven.deploy.skip>
     </properties>
