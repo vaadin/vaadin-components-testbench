@@ -49,15 +49,15 @@ public class UploadIT extends AbstractIT {
         File file1 = createTempFile(file1Contents);
 
         upload.upload(file1);
-        String logRow = getLogRow(0);
-        Assert.assertTrue(logRow.endsWith("File " + file1.getName()
-                + " of size " + file1Contents.length + " received"));
+        Assert.assertEquals("File " + file1.getName() + " of size "
+                + file1Contents.length + " received",
+                getLogRowWithoutNumber(0));
 
         File file2 = createTempFile(file2Contents);
         upload.upload(file2);
-        logRow = getLogRow(0);
-        Assert.assertTrue(logRow.endsWith("File " + file2.getName()
-                + " of size " + file2Contents.length + " received"));
+        Assert.assertEquals("File " + file2.getName() + " of size "
+                + file2Contents.length + " received",
+                getLogRowWithoutNumber(0));
     }
 
     @Test
