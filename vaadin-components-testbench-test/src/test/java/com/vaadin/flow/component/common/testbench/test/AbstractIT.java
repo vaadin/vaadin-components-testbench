@@ -15,6 +15,7 @@
  */
 package com.vaadin.flow.component.common.testbench.test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -41,7 +42,9 @@ public abstract class AbstractIT extends AbstractParallelSauceLabsTest {
 
     @BrowserConfiguration
     public List<DesiredCapabilities> getBrowserConfiguration() {
-        return Arrays.asList(BrowserUtil.chrome());
+        return new ArrayList<>(Arrays.asList(BrowserUtil.chrome(),
+                BrowserUtil.edge(), BrowserUtil.ie11(), BrowserUtil.firefox(),
+                BrowserUtil.safari()));
     }
 
     @Before

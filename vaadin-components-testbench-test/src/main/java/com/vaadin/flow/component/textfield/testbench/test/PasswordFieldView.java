@@ -18,6 +18,7 @@ package com.vaadin.flow.component.textfield.testbench.test;
 import com.vaadin.flow.component.HasValue.ValueChangeEvent;
 import com.vaadin.flow.component.common.testbench.test.AbstractView;
 import com.vaadin.flow.component.textfield.PasswordField;
+import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
@@ -26,7 +27,7 @@ import com.vaadin.flow.theme.lumo.Lumo;
 @Theme(Lumo.class)
 public class PasswordFieldView extends AbstractView {
 
-    public static final String LABEL = "text";
+    public static final String LABEL_EAGER = "text";
     public static final String NOLABEL = "notext";
     public static final String INITIAL_VALUE = "initialvalue";
     public static final String PLACEHOLDER = "placeholder";
@@ -38,8 +39,9 @@ public class PasswordFieldView extends AbstractView {
         passwordFieldNoLabel.addValueChangeListener(this::onValueChange);
         add(passwordFieldNoLabel);
 
-        PasswordField passwordFieldLabel = new PasswordField("Label");
-        passwordFieldLabel.setId(LABEL);
+        PasswordField passwordFieldLabel = new PasswordField("Label (eager)");
+        passwordFieldLabel.setValueChangeMode(ValueChangeMode.EAGER);
+        passwordFieldLabel.setId(LABEL_EAGER);
         passwordFieldLabel.addValueChangeListener(this::onValueChange);
         add(passwordFieldLabel);
 

@@ -24,14 +24,14 @@ import com.vaadin.flow.component.textfield.testbench.TextAreaElement;
 
 public class TextAreaIT extends AbstractIT {
 
-    private TextAreaElement label;
+    private TextAreaElement labelEager;
     private TextAreaElement nolabel;
     private TextAreaElement initialValue;
     private TextAreaElement placeholder;
 
     @Before
     public void find() {
-        label = $(TextAreaElement.class).id(TextAreaView.LABEL);
+        labelEager = $(TextAreaElement.class).id(TextAreaView.LABEL_EAGER);
         nolabel = $(TextAreaElement.class).id(TextAreaView.NOLABEL);
         initialValue = $(TextAreaElement.class).id(TextAreaView.INITIAL_VALUE);
         placeholder = $(TextAreaElement.class).id(TextAreaView.PLACEHOLDER);
@@ -39,13 +39,13 @@ public class TextAreaIT extends AbstractIT {
 
     @Test
     public void getSetValue() throws Exception {
-        Assert.assertEquals("", label.getValue());
+        Assert.assertEquals("", labelEager.getValue());
         Assert.assertEquals("", nolabel.getValue());
         Assert.assertEquals("Initial", initialValue.getValue());
         Assert.assertEquals("", placeholder.getValue());
 
-        label.setValue("Foo");
-        assertStringValue(label, "Foo");
+        labelEager.setValue("Foo");
+        assertStringValue(labelEager, "Foo");
 
         nolabel.setValue("Foo");
         assertStringValue(nolabel, "Foo");
@@ -58,8 +58,8 @@ public class TextAreaIT extends AbstractIT {
     }
 
     @Test
-    public void getLabel() throws Exception {
-        Assert.assertEquals("Label", label.getLabel());
+    public void getLabelEager() throws Exception {
+        Assert.assertEquals("Label (eager)", labelEager.getLabel());
         Assert.assertEquals("", nolabel.getLabel());
         Assert.assertEquals("Has an initial value", initialValue.getLabel());
         Assert.assertEquals("Has a placeholder", placeholder.getLabel());
@@ -67,7 +67,7 @@ public class TextAreaIT extends AbstractIT {
 
     @Test
     public void getPlaceholder() throws Exception {
-        Assert.assertEquals("", label.getPlaceholder());
+        Assert.assertEquals("", labelEager.getPlaceholder());
         Assert.assertEquals("", nolabel.getPlaceholder());
         Assert.assertEquals("", initialValue.getPlaceholder());
         Assert.assertEquals("Text goes here", placeholder.getPlaceholder());

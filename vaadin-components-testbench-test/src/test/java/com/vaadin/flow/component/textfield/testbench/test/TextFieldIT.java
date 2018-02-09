@@ -24,14 +24,14 @@ import com.vaadin.flow.component.textfield.testbench.TextFieldElement;
 
 public class TextFieldIT extends AbstractIT {
 
-    private TextFieldElement label;
+    private TextFieldElement labelEager;
     private TextFieldElement nolabel;
     private TextFieldElement initialValue;
     private TextFieldElement placeholder;
 
     @Before
     public void find() {
-        label = $(TextFieldElement.class).id(TextFieldView.LABEL);
+        labelEager = $(TextFieldElement.class).id(TextFieldView.LABEL_EAGER);
         nolabel = $(TextFieldElement.class).id(TextFieldView.NOLABEL);
         initialValue = $(TextFieldElement.class)
                 .id(TextFieldView.INITIAL_VALUE);
@@ -40,13 +40,13 @@ public class TextFieldIT extends AbstractIT {
 
     @Test
     public void getSetValue() throws Exception {
-        Assert.assertEquals("", label.getValue());
+        Assert.assertEquals("", labelEager.getValue());
         Assert.assertEquals("", nolabel.getValue());
         Assert.assertEquals("Initial", initialValue.getValue());
         Assert.assertEquals("", placeholder.getValue());
 
-        label.setValue("Foo");
-        assertStringValue(label, "Foo");
+        labelEager.setValue("Foo");
+        assertStringValue(labelEager, "Foo");
 
         nolabel.setValue("Foo");
         assertStringValue(nolabel, "Foo");
@@ -59,8 +59,8 @@ public class TextFieldIT extends AbstractIT {
     }
 
     @Test
-    public void getLabel() throws Exception {
-        Assert.assertEquals("Label", label.getLabel());
+    public void getLabelEager() throws Exception {
+        Assert.assertEquals("Label (eager)", labelEager.getLabel());
         Assert.assertEquals("", nolabel.getLabel());
         Assert.assertEquals("Has an initial value", initialValue.getLabel());
         Assert.assertEquals("Has a placeholder", placeholder.getLabel());
@@ -68,7 +68,7 @@ public class TextFieldIT extends AbstractIT {
 
     @Test
     public void getPlaceholder() throws Exception {
-        Assert.assertEquals("", label.getPlaceholder());
+        Assert.assertEquals("", labelEager.getPlaceholder());
         Assert.assertEquals("", nolabel.getPlaceholder());
         Assert.assertEquals("", initialValue.getPlaceholder());
         Assert.assertEquals("Text goes here", placeholder.getPlaceholder());
