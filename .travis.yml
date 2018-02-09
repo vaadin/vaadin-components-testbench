@@ -4,14 +4,18 @@ before_install: echo "sauce.user=$SAUCE_USER" > local.properties && echo "sauce.
 script: mvn -B verify
 after_success: "./.travis.after_success.sh"
 dist: trusty
-branches:
-  only:
-  - master
 cache:
   directories:
   - "$HOME/.m2"
 before_cache:
-- rm -rf $HOME/.m2/repository/com/vaadin/flow/component
+  - rm -rf $HOME/.m2/repository/com/vaadin/flow/component
+env:
+  - BROWSERS=chrome
+  - BROWSERS=firefox
+  - BROWSERS=ie11
+  - BROWSERS=edge
+  - BROWSERS=safari
+
 env:
   global:
   - secure: Dyyn5b6ldj5LdCcZhLNt7S1CgYxu3qtCufOZBhYHwojALZAs+aHWHK8EsD2cVgbYYoPQQm0/nLKDTS2qornFBbpFvimAxdXmCjWx7nFVA1NTIUaxdNT8S1ol6xY9IdRr2vc//mdsKAWYdt5bwuThEsbUuT4zWzM6JPpAXxZIgzEcQJ45+8e8rH1onsLNi1Njz8PNdyN4cjYXHDg9wGU0YDA7ng1OoB9h32DqhDsB5yV53D/dAsYXWoJTu28aLgyXE3rcYmboK3U26rh3QqjZ/FK66B+b0yy0mclXu7y2laFNfCEJ5F1MrmhNiZCu/RByJBr4n/JcwxtEOoW/WWR2k2IV9e/jZ76GplWLAESoF7MKZ6hwzPzMGx9TuYxx6I8o53xB2qY7hM9XiDUmbovetAepXy7BOeI27preHjzYQ69NloDJVQ/EYICsZulZZj/Y22NqTKjcHs6COGv2HiVO5MXBvC24XO3lnxQ5//TDR//BAXxKmus1NZYmz/00zSoUPDaLVFG6Yd7lgK2SSoaQYeKxWgn/tEnjhkdUEd3BVtWgiAspLsOITMKGCgnnrfsuzoI2/hnxDr+1u2Wo7rtPlsKQXl9KNWjnmTXq2efdIwTXK0f6YGmSRecAcbnTdaR96PMtnjA70seQg6EnIIRW/gU+Hib2TcvYKrSpsgZ+Y08=
