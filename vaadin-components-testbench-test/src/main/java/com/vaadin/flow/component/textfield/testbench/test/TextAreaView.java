@@ -18,6 +18,7 @@ package com.vaadin.flow.component.textfield.testbench.test;
 import com.vaadin.flow.component.HasValue.ValueChangeEvent;
 import com.vaadin.flow.component.common.testbench.test.AbstractView;
 import com.vaadin.flow.component.textfield.TextArea;
+import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
@@ -26,7 +27,7 @@ import com.vaadin.flow.theme.lumo.Lumo;
 @Theme(Lumo.class)
 public class TextAreaView extends AbstractView {
 
-    public static final String LABEL = "text";
+    public static final String LABEL_EAGER = "text";
     public static final String NOLABEL = "notext";
     public static final String INITIAL_VALUE = "initialvalue";
     public static final String PLACEHOLDER = "placeholder";
@@ -38,8 +39,9 @@ public class TextAreaView extends AbstractView {
         textAreaNoLabel.addValueChangeListener(this::onValueChange);
         add(textAreaNoLabel);
 
-        TextArea textAreaLabel = new TextArea("Label");
-        textAreaLabel.setId(LABEL);
+        TextArea textAreaLabel = new TextArea("Label (eager)");
+        textAreaLabel.setValueChangeMode(ValueChangeMode.EAGER);
+        textAreaLabel.setId(LABEL_EAGER);
         textAreaLabel.addValueChangeListener(this::onValueChange);
         add(textAreaLabel);
 
