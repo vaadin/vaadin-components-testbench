@@ -29,6 +29,9 @@ public class GridTHTDElement extends TestBenchElement {
 
     @Override
     public String getText() {
+        // The first child element of a cell is a slot. The following JS finds
+        // the elements assigned to that slot and then joins the `textContent`
+        // of the elements slots
         String text = (String) executeScript("var cell = arguments[0];"
                 + "return Array.from(cell.firstElementChild.assignedNodes()).map(function(node) { return node.textContent;}).join('');",
                 this);

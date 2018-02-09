@@ -16,14 +16,12 @@
 package com.vaadin.flow.component.grid.testbench;
 
 import com.vaadin.testbench.TestBenchElement;
-import com.vaadin.testbench.elementsbase.Element;
 
 /**
  * A TestBench element representing a <code>&lt;vaadin-grid-column&gt;</code>
  * element. This is not a TestBenchElement as polyfilled browsers are not
  * capable of finding it or handling it as a web element.
  */
-@Element("vaadin-grid-column")
 public class GridColumnElement {
 
     private GridElement grid;
