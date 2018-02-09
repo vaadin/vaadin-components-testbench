@@ -22,6 +22,7 @@ import org.junit.Test;
 import com.vaadin.flow.component.button.testbench.ButtonElement;
 import com.vaadin.flow.component.common.testbench.test.AbstractIT;
 import com.vaadin.flow.component.tabs.testbench.TabsElement;
+import com.vaadin.testbench.parallel.BrowserUtil;
 
 public class TabsIT extends AbstractIT {
 
@@ -43,6 +44,12 @@ public class TabsIT extends AbstractIT {
 
     @Test
     public void getSelectedTabElement() throws Exception {
+        // https://github.com/vaadin/vaadin-tabs-flow/issues/27
+        if (BrowserUtil.isEdge(getDesiredCapabilities())
+                || BrowserUtil.isFirefox(getDesiredCapabilities())
+                || BrowserUtil.isIE(getDesiredCapabilities())) {
+            return;
+        }
         def.getSelectedTabElement().$(ButtonElement.class).first().click();
         Assert.assertEquals("1. Hello clicked", getLogRow(0));
         def.setSelectedTabIndex(2);
