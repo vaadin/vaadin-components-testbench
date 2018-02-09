@@ -17,8 +17,6 @@ package com.vaadin.flow.component.combobox.testbench;
 
 import java.util.List;
 
-import org.jboss.weld.exceptions.IllegalArgumentException;
-
 import com.vaadin.flow.component.common.testbench.HasLabel;
 import com.vaadin.flow.component.common.testbench.HasSelectByText;
 import com.vaadin.testbench.TestBenchElement;
