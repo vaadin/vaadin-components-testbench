@@ -24,14 +24,15 @@ import com.vaadin.flow.component.textfield.testbench.PasswordFieldElement;
 
 public class PasswordFieldIT extends AbstractIT {
 
-    private PasswordFieldElement label;
+    private PasswordFieldElement labelEager;
     private PasswordFieldElement nolabel;
     private PasswordFieldElement initialValue;
     private PasswordFieldElement placeholder;
 
     @Before
     public void find() {
-        label = $(PasswordFieldElement.class).id(PasswordFieldView.LABEL);
+        labelEager = $(PasswordFieldElement.class)
+                .id(PasswordFieldView.LABEL_EAGER);
         nolabel = $(PasswordFieldElement.class).id(PasswordFieldView.NOLABEL);
         initialValue = $(PasswordFieldElement.class)
                 .id(PasswordFieldView.INITIAL_VALUE);
@@ -41,13 +42,13 @@ public class PasswordFieldIT extends AbstractIT {
 
     @Test
     public void getSetValue() throws Exception {
-        Assert.assertEquals("", label.getValue());
+        Assert.assertEquals("", labelEager.getValue());
         Assert.assertEquals("", nolabel.getValue());
         Assert.assertEquals("Initial", initialValue.getValue());
         Assert.assertEquals("", placeholder.getValue());
 
-        label.setValue("Foo");
-        assertStringValue(label, "Foo");
+        labelEager.setValue("Foo");
+        assertStringValue(labelEager, "Foo");
 
         nolabel.setValue("Foo");
         assertStringValue(nolabel, "Foo");
@@ -60,8 +61,8 @@ public class PasswordFieldIT extends AbstractIT {
     }
 
     @Test
-    public void getLabel() throws Exception {
-        Assert.assertEquals("Label", label.getLabel());
+    public void getLabelEager() throws Exception {
+        Assert.assertEquals("Label (eager)", labelEager.getLabel());
         Assert.assertEquals("", nolabel.getLabel());
         Assert.assertEquals("Has an initial value", initialValue.getLabel());
         Assert.assertEquals("Has a placeholder", placeholder.getLabel());
@@ -69,7 +70,7 @@ public class PasswordFieldIT extends AbstractIT {
 
     @Test
     public void getPlaceholder() throws Exception {
-        Assert.assertEquals("", label.getPlaceholder());
+        Assert.assertEquals("", labelEager.getPlaceholder());
         Assert.assertEquals("", nolabel.getPlaceholder());
         Assert.assertEquals("", initialValue.getPlaceholder());
         Assert.assertEquals("Text goes here", placeholder.getPlaceholder());
@@ -77,27 +78,27 @@ public class PasswordFieldIT extends AbstractIT {
 
     @Test
     public void passwordVisible() throws Exception {
-        Assert.assertFalse(label.isPasswordVisible());
+        Assert.assertFalse(labelEager.isPasswordVisible());
         Assert.assertFalse(nolabel.isPasswordVisible());
         Assert.assertFalse(initialValue.isPasswordVisible());
         Assert.assertFalse(placeholder.isPasswordVisible());
 
-        label.setPasswordVisible(true);
+        labelEager.setPasswordVisible(true);
         nolabel.setPasswordVisible(true);
         initialValue.setPasswordVisible(true);
         placeholder.setPasswordVisible(true);
 
-        Assert.assertTrue(label.isPasswordVisible());
+        Assert.assertTrue(labelEager.isPasswordVisible());
         Assert.assertTrue(nolabel.isPasswordVisible());
         Assert.assertTrue(initialValue.isPasswordVisible());
         Assert.assertTrue(placeholder.isPasswordVisible());
 
-        label.setPasswordVisible(false);
+        labelEager.setPasswordVisible(false);
         nolabel.setPasswordVisible(false);
         initialValue.setPasswordVisible(false);
         placeholder.setPasswordVisible(false);
 
-        Assert.assertFalse(label.isPasswordVisible());
+        Assert.assertFalse(labelEager.isPasswordVisible());
         Assert.assertFalse(nolabel.isPasswordVisible());
         Assert.assertFalse(initialValue.isPasswordVisible());
         Assert.assertFalse(placeholder.isPasswordVisible());
