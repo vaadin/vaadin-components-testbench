@@ -16,6 +16,7 @@
 package com.vaadin.flow.component.notification.testbench;
 
 import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.StaleElementReferenceException;
 
 import com.vaadin.testbench.TestBenchElement;
 import com.vaadin.testbench.elementsbase.Element;
@@ -34,7 +35,13 @@ public class NotificationElement extends TestBenchElement {
      *         <code>false</code> otherwise
      */
     public boolean isOpen() {
-        return getPropertyBoolean("opened");
+        try {
+            return getPropertyBoolean("opened");
+        } catch (StaleElementReferenceException e) {
+            // The element is no longer even attached to the DOM
+            // -> it's not open
+            return false;
+        }
     }
 
     @Override
