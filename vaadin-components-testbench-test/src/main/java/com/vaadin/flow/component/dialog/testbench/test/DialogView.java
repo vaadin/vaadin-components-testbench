@@ -19,6 +19,7 @@ import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.common.testbench.test.AbstractView;
 import com.vaadin.flow.component.dialog.Dialog;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.Theme;
@@ -35,7 +36,8 @@ public class DialogView extends AbstractView {
         dialog = new Dialog();
         dialog.setId(THE_DIALOG);
         dialog.add(new Label("This is the contents of the dialog"));
-        dialog.add(new Button("Close", e -> dialog.close()));
+        dialog.add(new Div(new Button("Close", e -> dialog.close()),
+                new Button("NoOp")));
     }
 
     @Override
