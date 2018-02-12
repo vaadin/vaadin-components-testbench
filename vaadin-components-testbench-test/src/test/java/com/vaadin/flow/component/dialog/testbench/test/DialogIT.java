@@ -35,13 +35,6 @@ public class DialogIT extends AbstractIT {
     @Test
     public void openClose() throws Exception {
         Assert.assertTrue(dialog.isOpen());
-        dialog.close();
-        Assert.assertFalse(dialog.isOpen());
-    }
-
-    @Test
-    public void notOpenAfterClosedThroughCode() throws Exception {
-        Assert.assertTrue(dialog.isOpen());
         dialog.$(ButtonElement.class).first().click();
         Assert.assertFalse(dialog.isOpen());
     }
