@@ -147,9 +147,8 @@ public class GridIT extends AbstractIT {
                 noHeader.getCell(100, 1).getText());
         Assert.assertEquals("Last name 1000",
                 tenMillion.getCell(1000, 1).getText());
-        // Requires new vaadin-grid release
-        // Assert.assertEquals("Last name 1000000",
-        // tenMillion.getCell(1000000, 1).getText());
+        Assert.assertEquals("Last name 1000000",
+                tenMillion.getCell(1000000, 1).getText());
     }
 
     @Test
