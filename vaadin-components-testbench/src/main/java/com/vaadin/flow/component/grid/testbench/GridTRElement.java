@@ -34,7 +34,7 @@ public class GridTRElement extends TestBenchElement {
                 "const grid = arguments[0];" //
                         + "const columnId = arguments[1];" //
                         + "return Array.from(grid.children)."
-                        + "filter(function(cell) { return cell._column.__generatedTbId == columnId;})[0]",
+                        + "filter(function(cell) { return cell._column && cell._column.__generatedTbId == columnId;})[0]",
                 this, column.get__generatedId());
         return e.wrap(GridTHTDElement.class);
     }
@@ -64,5 +64,29 @@ public class GridTRElement extends TestBenchElement {
     public void deselect() {
         executeScript("var grid = arguments[0].getRootNode().host;"
                 + "grid.deselectItem(arguments[0]._item);", this);
+    }
+
+    /**
+     * Gets the grid containing this element.
+     *
+     * @return the grid for this element
+     */
+    public GridElement getGrid() {
+        return ((TestBenchElement) executeScript(
+                "return arguments[0].getRootNode().host", this))
+                        .wrap(GridElement.class);
+    }
+
+    /**
+     * Gets the details container for this row.
+     *
+     * @return the element containing the details, if any
+     */
+    public GridTHTDElement getDetailsRow() {
+        return ((TestBenchElement) executeScript("const tr = arguments[0];"
+                + "const grid = tr.getRootNode().host;" //
+                + "return grid._detailsCells" //
+                + ".filter(function(cell) {return cell.parentElement.rowIndex && cell.parentElement.rowIndex == tr.rowIndex;})[0]"
+                + ";", this)).wrap(GridTHTDElement.class);
     }
 }
