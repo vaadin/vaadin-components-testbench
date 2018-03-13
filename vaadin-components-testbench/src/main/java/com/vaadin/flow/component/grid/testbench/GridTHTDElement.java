@@ -18,6 +18,7 @@ package com.vaadin.flow.component.grid.testbench;
 import java.util.List;
 
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.SearchContext;
 
 import com.vaadin.testbench.TestBenchElement;
 
@@ -26,6 +27,13 @@ import com.vaadin.testbench.TestBenchElement;
  * <code>&lt;th&gt;</code> element in a grid.
  */
 public class GridTHTDElement extends TestBenchElement {
+
+    @Override
+    public SearchContext getContext() {
+        return (SearchContext) executeScript(
+                "return arguments[0].firstElementChild.assignedNodes()[0];",
+                this);
+    }
 
     @Override
     public String getText() {
