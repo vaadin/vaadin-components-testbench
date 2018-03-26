@@ -31,6 +31,7 @@ public class TextAreaElement extends TestBenchElement
     @Override
     public void setValue(String string) {
         HasStringValueProperty.super.setValue(string);
+        dispatchEvent("change");
         dispatchEvent("blur");
     }
 
