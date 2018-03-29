@@ -121,7 +121,7 @@ public class GridView extends AbstractView {
                 new Span(p.getLastName()), button);
     }
 
-    private String getSelection(SelectionEvent<Person> e) {
+    private String getSelection(SelectionEvent<Grid<Person>, Person> e) {
         return e.getAllSelectedItems().stream().map(Person::toString)
                 .collect(Collectors.joining(", "));
     }

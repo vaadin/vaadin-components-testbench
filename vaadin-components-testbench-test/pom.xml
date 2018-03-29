@@ -17,28 +17,29 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <sauce.options>--tunnel-identifier ${maven.build.timestamp}</sauce.options>
-        <flow.version>1.0.0.beta3</flow.version>
         <ci-sauce.version>1.132</ci-sauce.version>
         <maven.deploy.skip>true</maven.deploy.skip>
 
-        <vaadin.button.flow.version>1.0.0.beta1</vaadin.button.flow.version>
-        <vaadin.checkbox.flow.version>1.0.0.beta1</vaadin.checkbox.flow.version>
-        <vaadin.combo.box.flow.version>1.0.0.beta1</vaadin.combo.box.flow.version>
-        <vaadin.date.picker.flow.version>1.0.0.beta2</vaadin.date.picker.flow.version>
-        <vaadin.dialog.flow.version>1.0.0.beta1</vaadin.dialog.flow.version>
-        <vaadin.form.layout.flow.version>1.0.0.beta1</vaadin.form.layout.flow.version>
-        <vaadin.grid.flow.version>1.0.0.beta3</vaadin.grid.flow.version>
-        <vaadin.icons.flow.version>1.0.0.beta1</vaadin.icons.flow.version>
+        <flow.version>1.0.0.beta4</flow.version>
+
+        <vaadin.button.flow.version>1.0.0.beta3</vaadin.button.flow.version>
+        <vaadin.checkbox.flow.version>1.0.0.beta2</vaadin.checkbox.flow.version>
+        <vaadin.combo.box.flow.version>1.0.0.beta3</vaadin.combo.box.flow.version>
+        <vaadin.date.picker.flow.version>1.0.0.beta4</vaadin.date.picker.flow.version>
+        <vaadin.dialog.flow.version>1.0.0.beta2</vaadin.dialog.flow.version>
+        <vaadin.form.layout.flow.version>1.0.0.beta2</vaadin.form.layout.flow.version>
+        <vaadin.grid.flow.version>1.0.0.beta5</vaadin.grid.flow.version>
+        <vaadin.icons.flow.version>1.0.0.beta2</vaadin.icons.flow.version>
         <vaadin.iron.list.flow.version>1.0.0.beta2</vaadin.iron.list.flow.version>
-        <vaadin.list.box.flow.version>1.0.0.beta1</vaadin.list.box.flow.version>
-        <vaadin.notification.flow.version>1.0.0.beta1</vaadin.notification.flow.version>
-        <vaadin.ordered.layout.flow.version>1.0.0.beta1</vaadin.ordered.layout.flow.version>
-        <vaadin.progress.bar.flow.version>1.0.0.beta1</vaadin.progress.bar.flow.version>
-        <vaadin.radio.button.flow.version>1.0.0.beta1</vaadin.radio.button.flow.version>
-        <vaadin.split.layout.flow.version>1.0.0.beta1</vaadin.split.layout.flow.version>
-        <vaadin.tabs.flow.version>1.0.0.beta1</vaadin.tabs.flow.version>
-        <vaadin.text.field.flow.version>1.0.0.beta1</vaadin.text.field.flow.version>
-        <vaadin.upload.flow.version>1.0.0.beta3</vaadin.upload.flow.version>
+        <vaadin.list.box.flow.version>1.0.0.beta2</vaadin.list.box.flow.version>
+        <vaadin.notification.flow.version>1.0.0.beta3</vaadin.notification.flow.version>
+        <vaadin.ordered.layout.flow.version>1.0.0.beta2</vaadin.ordered.layout.flow.version>
+        <vaadin.progress.bar.flow.version>1.0.0.beta2</vaadin.progress.bar.flow.version>
+        <vaadin.radio.button.flow.version>1.0.0.beta2</vaadin.radio.button.flow.version>
+        <vaadin.split.layout.flow.version>1.0.0.beta2</vaadin.split.layout.flow.version>
+        <vaadin.tabs.flow.version>1.0.0.beta2</vaadin.tabs.flow.version>
+        <vaadin.text.field.flow.version>1.0.0.beta3</vaadin.text.field.flow.version>
+        <vaadin.upload.flow.version>1.0.0.beta4</vaadin.upload.flow.version>
     </properties>
     <dependencyManagement>
         <dependencies>
