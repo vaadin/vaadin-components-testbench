@@ -105,4 +105,13 @@ public class GridTHTDElement extends TestBenchElement {
                 "return arguments[0].getRootNode().host", this))
                         .wrap(GridElement.class);
     }
+
+    /**
+     * Gets the TR parent of this element.
+     *
+     * @return the parent TR element
+     */
+    public GridTRElement getRowElement() {
+        return getPropertyElement("parentElement").wrap(GridTRElement.class);
+    }
 }

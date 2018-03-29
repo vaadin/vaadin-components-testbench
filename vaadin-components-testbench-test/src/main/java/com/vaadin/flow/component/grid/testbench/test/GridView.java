@@ -17,6 +17,7 @@ package com.vaadin.flow.component.grid.testbench.test;
 
 import java.util.stream.Collectors;
 
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.common.testbench.test.AbstractView;
 import com.vaadin.flow.component.common.testbench.test.DataGenerator;
@@ -24,7 +25,9 @@ import com.vaadin.flow.component.common.testbench.test.Person;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.Grid.Column;
 import com.vaadin.flow.component.grid.Grid.SelectionMode;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.data.selection.SelectionEvent;
 import com.vaadin.flow.router.Route;
@@ -39,11 +42,11 @@ public class GridView extends AbstractView {
     public static final String HEADER_MULTISELECT = "header";
     public static final String TEN_MILLION = "tenmillion";
     public static final String COMPONENTS = "components";
+    public static final String DETAILS = "details";
 
     public GridView() {
         Grid<Person> gridNoHeader = new Grid<>();
         gridNoHeader.setId(NO_HEADER);
-        gridNoHeader.setWidth("100%");
         gridNoHeader.addColumn(person -> person.getFirstName());
         gridNoHeader.addColumn(person -> person.getLastName());
         gridNoHeader.addSelectionListener(e -> {
@@ -55,7 +58,6 @@ public class GridView extends AbstractView {
         Grid<Person> gridHeader = new Grid<>();
         gridHeader.setSelectionMode(SelectionMode.MULTI);
         gridHeader.setId(HEADER_MULTISELECT);
-        gridHeader.setWidth("100%");
         Column<Person> firstName = gridHeader
                 .addColumn(person -> person.getFirstName())
                 .setHeader("First name");
@@ -72,7 +74,6 @@ public class GridView extends AbstractView {
 
         Grid<Person> tenMillionGrid = new Grid<>();
         tenMillionGrid.setId(TEN_MILLION);
-        tenMillionGrid.setWidth("100%");
         firstName = tenMillionGrid.addColumn(person -> person.getFirstName())
                 .setHeader("First name").setFooter("First Footer");
         lastName = tenMillionGrid.addColumn(person -> person.getLastName())
@@ -88,7 +89,6 @@ public class GridView extends AbstractView {
 
         Grid<Person> componentGrid = new Grid<>();
         componentGrid.setId(COMPONENTS);
-        componentGrid.setWidth("100%");
         componentGrid
                 .addColumn(new ComponentRenderer<Button, Person>(person -> {
                     return new Button(person.getFirstName(), e -> {
@@ -96,15 +96,29 @@ public class GridView extends AbstractView {
                                 + "'");
                     });
                 }));
-
         componentGrid.addSelectionListener(e -> {
             log("Grid 'componentGrid' selection changed to '" + getSelection(e)
                     + "'");
         });
         componentGrid.setDataProvider(new DataGenerator(10000));
 
+        Grid<Person> detailsGrid = new Grid<>();
+        detailsGrid.setId(DETAILS);
+        detailsGrid.addColumn(person -> person.getFirstName());
+        detailsGrid.addColumn(person -> person.getLastName());
+        detailsGrid.setItemDetailsRenderer(
+                new ComponentRenderer<Component, Person>(
+                        person -> createDetails(person)));
+        detailsGrid.setDataProvider(new DataGenerator(10000));
+
         add(new HorizontalLayout(gridHeader, gridNoHeader, tenMillionGrid,
-                componentGrid));
+                componentGrid, detailsGrid));
+    }
+
+    private Component createDetails(Person p) {
+        Button button = new Button("Say hello", e -> log("Hello " + p));
+        return new VerticalLayout(new Span(p.getFirstName()),
+                new Span(p.getLastName()), button);
     }
 
     private String getSelection(SelectionEvent<Grid<Person>, Person> e) {
