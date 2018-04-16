@@ -18,7 +18,6 @@ package com.vaadin.flow.component.splitlayout.testbench.test;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.interactions.Actions;
 
 import com.vaadin.flow.component.common.testbench.test.AbstractIT;
 import com.vaadin.flow.component.splitlayout.testbench.SplitLayoutElement;
@@ -42,14 +41,9 @@ public class SplitLayoutIT extends AbstractIT {
 
     @Test
     public void findSplitter() throws Exception {
-        TextFieldElement lastName = $(TextFieldElement.class).last();
-        int initialWidth = lastName.getSize().getWidth();
-        int xOffset = 100;
-        new Actions(getDriver())
-                .dragAndDropBy(splitLayout.getSplitter(), xOffset, 0).build()
-                .perform();
-        Assert.assertEquals(initialWidth - xOffset,
-                lastName.getSize().getWidth(), 5);
+        int initialLayoutWidth = splitLayout.getSize().getWidth();
+        Assert.assertEquals(initialLayoutWidth / 2,
+                splitLayout.getSplitter().getLocation().getX(), 5);
     }
 
 }
