@@ -15,6 +15,8 @@
  */
 package com.vaadin.flow.component.notification.testbench.test;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -50,6 +52,12 @@ public class NotificationIT extends AbstractIT {
         Assert.assertTrue(components.isOpen());
         components.$(ButtonElement.class).id("close").click();
         Assert.assertFalse(components.isOpen());
+    }
+
+    @Test
+    public void findAllNotifications() throws Exception {
+        List<NotificationElement> notifications = $(NotificationElement.class).all();
+        Assert.assertEquals(3, notifications.size());
     }
 
     @Test
