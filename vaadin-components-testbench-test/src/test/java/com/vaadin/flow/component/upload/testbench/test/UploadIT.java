@@ -50,6 +50,7 @@ public class UploadIT extends AbstractIT {
     }
 
     @Test
+    @Ignore("Throws UnsupportedCommand 'POST' in Firefox")
     public void upload() throws Exception {
         byte[] file1Contents = "This is file 1"
                 .getBytes(StandardCharsets.UTF_8);

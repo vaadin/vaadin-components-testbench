@@ -29,7 +29,7 @@ public class ProgressBarView extends AbstractView {
     public static final String HUNDRED = "hundred";
 
     public ProgressBarView() {
-        ProgressBar progressBar = new ProgressBar();
+        ProgressBar progressBar = new ProgressBar(0, 10);
         progressBar.setId(DEFAULT);
         progressBar.setWidth("200px");
         progressBar.setValue(7);

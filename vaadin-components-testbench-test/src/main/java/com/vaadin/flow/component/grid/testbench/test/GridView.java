@@ -87,8 +87,6 @@ public class GridView extends AbstractView {
         tenMillionHeaderRow.join(tenMillionHeaderRow.getCell(firstName),
                 tenMillionHeaderRow.getCell(lastName)).setText("Name");
 
-        tenMillionGrid.prependFooterRow().getCell(firstName).setText("Something");
-
         tenMillionGrid.addSelectionListener(e -> {
             log("Grid 'tenmillion' selection changed to '" + getSelection(e)
                     + "'");

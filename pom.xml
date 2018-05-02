@@ -46,10 +46,6 @@
             <id>vaadin-snapshots</id>
             <url>https://oss.sonatype.org/content/repositories/vaadin-snapshots</url>
         </repository>
-        <repository>
-            <id>webjars-bintray</id>
-            <url>https://dl.bintray.com/webjars/maven/</url>
-        </repository>
     </repositories>
 
     <modules>
