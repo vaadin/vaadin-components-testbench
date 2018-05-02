@@ -25,6 +25,7 @@ import com.vaadin.flow.component.common.testbench.test.Person;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.Grid.Column;
 import com.vaadin.flow.component.grid.Grid.SelectionMode;
+import com.vaadin.flow.component.grid.HeaderRow;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -65,7 +66,10 @@ public class GridView extends AbstractView {
                 .addColumn(person -> person.getLastName())
                 .setHeader("Last name");
         gridHeader.addColumn(person -> person.getAge()).setHeader("Age");
-        gridHeader.mergeColumns(firstName, lastName).setHeader("Name");
+
+        HeaderRow headerRow = gridHeader.prependHeaderRow();
+        headerRow.join(headerRow.getCell(firstName), headerRow.getCell(lastName))
+                .setText("Name");
 
         gridHeader.addSelectionListener(e -> {
             log("Grid 'header' selection changed to '" + getSelection(e) + "'");
@@ -78,8 +82,12 @@ public class GridView extends AbstractView {
                 .setHeader("First name").setFooter("First Footer");
         lastName = tenMillionGrid.addColumn(person -> person.getLastName())
                 .setHeader("Last name").setFooter("Last Footer");
-        tenMillionGrid.mergeColumns(firstName, lastName).setHeader("Name")
-                .setFooter("Something");
+
+        HeaderRow tenMillionHeaderRow = tenMillionGrid.prependHeaderRow();
+        tenMillionHeaderRow.join(tenMillionHeaderRow.getCell(firstName),
+                tenMillionHeaderRow.getCell(lastName)).setText("Name");
+
+        tenMillionGrid.prependFooterRow().getCell(firstName).setText("Something");
 
         tenMillionGrid.addSelectionListener(e -> {
             log("Grid 'tenmillion' selection changed to '" + getSelection(e)
