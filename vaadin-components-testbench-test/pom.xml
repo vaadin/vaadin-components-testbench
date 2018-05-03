@@ -233,30 +233,9 @@
                         <sauce.user>${sauce.user}</sauce.user>
                         <sauce.sauceAccessKey>${sauce.sauceAccessKey}</sauce.sauceAccessKey>
                         <sauce.options>${sauce.options}</sauce.options>
-                        <webdriver.chrome.driver>${webdriver.chrome.driver}</webdriver.chrome.driver>
-                        <webdriver.gecko.driver>${webdriver.gecko.driver}</webdriver.gecko.driver>
                     </systemPropertyVariables>
                     <trimStackTrace>false</trimStackTrace>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.lazerycode.selenium</groupId>
-                <artifactId>driver-binary-downloader-maven-plugin</artifactId>
-                <version>1.0.17</version>
-                <configuration>
-                    <!-- root directory that downloaded driver binaries will be stored
-                        in -->
-                    <onlyGetDriversForHostOperatingSystem>true</onlyGetDriversForHostOperatingSystem>
-                    <rootStandaloneServerDirectory>.driver</rootStandaloneServerDirectory>
-                    <customRepositoryMap>${project.parent.basedir}/drivers.xml</customRepositoryMap>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>selenium</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>com.saucelabs.maven.plugin</groupId>
