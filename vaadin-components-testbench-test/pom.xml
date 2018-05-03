@@ -235,7 +235,6 @@
                         <sauce.options>${sauce.options}</sauce.options>
                         <webdriver.chrome.driver>${webdriver.chrome.driver}</webdriver.chrome.driver>
                         <webdriver.gecko.driver>${webdriver.gecko.driver}</webdriver.gecko.driver>
-                        <com.vaadin.testbench.Parameters.runLocally>chrome</com.vaadin.testbench.Parameters.runLocally>
                     </systemPropertyVariables>
                     <trimStackTrace>false</trimStackTrace>
                 </configuration>
