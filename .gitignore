@@ -3,5 +3,6 @@ target
 .settings
 .project
 .idea
+*.iml
 
 local.properties

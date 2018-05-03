@@ -15,7 +15,7 @@
  */
 package com.vaadin.flow.component.textfield.testbench.test;
 
-import com.vaadin.flow.component.HasValue.ValueChangeEvent;
+import com.vaadin.flow.component.AbstractField.ComponentValueChangeEvent;
 import com.vaadin.flow.component.common.testbench.test.AbstractView;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.data.value.ValueChangeMode;
@@ -60,7 +60,7 @@ public class PasswordFieldView extends AbstractView {
         add(passwordFieldPlaceholder);
     }
 
-    protected void onValueChange(ValueChangeEvent<PasswordField, String> e) {
+    protected void onValueChange(ComponentValueChangeEvent<PasswordField, String> e) {
         String label = e.getSource().getLabel();
         if (label == null) {
             label = "";
