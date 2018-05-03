@@ -249,7 +249,7 @@
                         in -->
                     <onlyGetDriversForHostOperatingSystem>true</onlyGetDriversForHostOperatingSystem>
                     <rootStandaloneServerDirectory>.driver</rootStandaloneServerDirectory>
-                    <customRepositoryMap>../drivers.xml</customRepositoryMap>
+                    <customRepositoryMap>${project.parent.basedir}/drivers.xml</customRepositoryMap>
                 </configuration>
                 <executions>
                     <execution>
