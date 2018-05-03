@@ -15,7 +15,7 @@
  */
 package com.vaadin.flow.component.textfield.testbench.test;
 
-import com.vaadin.flow.component.HasValue.ValueChangeEvent;
+import com.vaadin.flow.component.AbstractField.ComponentValueChangeEvent;
 import com.vaadin.flow.component.common.testbench.test.AbstractView;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.data.value.ValueChangeMode;
@@ -58,7 +58,7 @@ public class TextAreaView extends AbstractView {
         add(textAreaPlaceholder);
     }
 
-    protected void onValueChange(ValueChangeEvent<TextArea, String> e) {
+    protected void onValueChange(ComponentValueChangeEvent<TextArea, String> e) {
         String label = e.getSource().getLabel();
         if (label == null) {
             label = "";

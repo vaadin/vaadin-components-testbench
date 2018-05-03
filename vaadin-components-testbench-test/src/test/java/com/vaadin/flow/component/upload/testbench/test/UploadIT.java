@@ -27,6 +27,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import com.vaadin.flow.component.common.testbench.test.AbstractIT;
@@ -96,6 +97,17 @@ public class UploadIT extends AbstractIT {
         }
         tempFile.deleteOnExit();
         return tempFile;
+    }
+
+    @Override
+    public void setDesiredCapabilities(DesiredCapabilities desiredCapabilities) {
+        // Disable interactivity check which prevents UploadElement from receiving sendKeys
+        // in Firefox https://github.com/mozilla/geckodriver/#mozwebdriverclick
+        if (desiredCapabilities.getBrowserName().equals(BrowserType.FIREFOX)) {
+            desiredCapabilities.setCapability("moz:webdriverClick", false);
+        }
+
+        super.setDesiredCapabilities(desiredCapabilities);
     }
 
 }
