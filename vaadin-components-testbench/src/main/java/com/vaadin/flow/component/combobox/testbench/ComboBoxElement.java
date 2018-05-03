@@ -50,11 +50,11 @@ public class ComboBoxElement extends TestBenchElement
     @Override
     public String getSelectedText() {
         return (String) executeScript("var combobox = arguments[0];" //
-                + "var value = combobox.value;" //
-                + "if (!value) " //
+                + "var selectedItem = combobox.selectedItem;" //
+                + "if (!selectedItem) " //
                 + "  return '';" //
                 + "else " //
-                + "  return combobox._getItemLabel(combobox.items.filter(function(item) { return item.key == value;})[0])",
+                + "  return combobox._getItemLabel(combobox.items.filter(function(item) { return item.key == selectedItem.key;})[0])",
                 this);
     }
 
