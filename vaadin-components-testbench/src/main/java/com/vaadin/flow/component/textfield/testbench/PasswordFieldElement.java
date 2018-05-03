@@ -49,9 +49,7 @@ public class PasswordFieldElement extends TestBenchElement
      *            <code>false</code> to hide the passwors from view
      */
     public void setPasswordVisible(boolean passwordVisible) {
-        if (isPasswordVisible() != passwordVisible) {
-            callFunction("_togglePasswordVisibility");
-        }
+        callFunction("_setPasswordVisible", passwordVisible);
     }
 
     @Override
