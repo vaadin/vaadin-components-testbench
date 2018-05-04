@@ -30,11 +30,19 @@ public class ComboBoxIT extends AbstractIT {
     private ComboBoxElement comboBoxWithNoText;
     private ComboBoxElement comboBoxWithBeans;
 
+    private ComboBoxElement comboBoxWithTextWithPreSelectedValue;
+    private ComboBoxElement comboBoxWithNoTextWithPreSelectedValue;
+    private ComboBoxElement comboBoxWithBeansWithPreSelectedValue;
+
     @Before
     public void find() {
         comboBoxWithText = $(ComboBoxElement.class).id(ComboBoxView.TEXT);
         comboBoxWithNoText = $(ComboBoxElement.class).id(ComboBoxView.NOTEXT);
         comboBoxWithBeans = $(ComboBoxElement.class).id(ComboBoxView.BEANS);
+
+        comboBoxWithTextWithPreSelectedValue = $(ComboBoxElement.class).id(ComboBoxView.TEXT_WITH_PRE_SLELECTED_VALUE);
+        comboBoxWithNoTextWithPreSelectedValue = $(ComboBoxElement.class).id(ComboBoxView.NOTEXT_WITH_PRE_SLELECTED_VALUE);
+        comboBoxWithBeansWithPreSelectedValue = $(ComboBoxElement.class).id(ComboBoxView.BEANS_WITH_PRE_SLELECTED_VALUE);
     }
 
     @Test
@@ -63,6 +71,17 @@ public class ComboBoxIT extends AbstractIT {
                 "3. ComboBox 'Persons' value is now Person [firstName=John, lastName=Doe, age=20]",
                 getLogRow(0));
         Assert.assertEquals("Doe, John", comboBoxWithBeans.getSelectedText());
+    }
+
+    @Test
+    public void getSelectedText(){
+        Assert.assertEquals(ComboBoxView.PRE_SELECTED_VALUE_FOR_COMBOBOX_WITHOUT_TEXT,
+                comboBoxWithNoTextWithPreSelectedValue.getSelectedText());
+        Assert.assertEquals(ComboBoxView.PRE_SELECTED_VALUE_FOR_COMBOBOX_WITH_TEXT,
+                comboBoxWithTextWithPreSelectedValue.getSelectedText());
+        Assert.assertEquals(ComboBoxView.PRE_SELECTED_PERSON_FOR_COMBOBOX_WITH_BEANS.getLastName()+ ", " +
+                ComboBoxView.PRE_SELECTED_PERSON_FOR_COMBOBOX_WITH_BEANS.getFirstName(),
+                comboBoxWithBeansWithPreSelectedValue.getSelectedText());
     }
 
     @Test
