@@ -31,6 +31,13 @@ public class ComboBoxView extends AbstractView {
     public static final String TEXT = "text";
     public static final String NOTEXT = "notext";
     public static final String BEANS = "beans";
+    public static final String TEXT_WITH_PRE_SLELECTED_VALUE = "text_with_preselected_value";
+    public static final String NOTEXT_WITH_PRE_SLELECTED_VALUE = "notext_with_preselected_value";
+    public static final String BEANS_WITH_PRE_SLELECTED_VALUE = "beans_with_preselected_value";
+    public static final String PRE_SELECTED_VALUE_FOR_COMBOBOX_WITHOUT_TEXT = "Item 1";
+    public static final String PRE_SELECTED_VALUE_FOR_COMBOBOX_WITH_TEXT = "Item 18";
+    public static final Person PRE_SELECTED_PERSON_FOR_COMBOBOX_WITH_BEANS = new Person("John", "Doe", 20);
+
 
     public ComboBoxView() {
 
@@ -66,6 +73,30 @@ public class ComboBoxView extends AbstractView {
                     + e.getValue());
         });
         add(comboBoxWithBean);
+
+        ComboBox<String> comboBoxWithoutTextWithPreSelectedValue = new ComboBox<>();
+        comboBoxWithoutTextWithPreSelectedValue.setId(NOTEXT_WITH_PRE_SLELECTED_VALUE);
+        comboBoxWithoutTextWithPreSelectedValue
+                .setItems(IntStream.range(0, 20).mapToObj(i -> "Item " + i));
+        comboBoxWithoutTextWithPreSelectedValue.setValue(PRE_SELECTED_VALUE_FOR_COMBOBOX_WITHOUT_TEXT);
+        add(comboBoxWithoutTextWithPreSelectedValue);
+
+        ComboBox<String> comboBoxWithTextWithPreSelectedValue = new ComboBox<>("Text");
+        comboBoxWithTextWithPreSelectedValue.setId(TEXT_WITH_PRE_SLELECTED_VALUE);
+        comboBoxWithTextWithPreSelectedValue
+                .setItems(IntStream.range(0, 20).mapToObj(i -> "Item " + i));
+        comboBoxWithTextWithPreSelectedValue.setValue(ComboBoxView.PRE_SELECTED_VALUE_FOR_COMBOBOX_WITH_TEXT);
+        add(comboBoxWithTextWithPreSelectedValue);
+
+        ComboBox<Person> comboBoxWithBeanWithPreSelectedValue = new ComboBox<>("Persons");
+        comboBoxWithBeanWithPreSelectedValue.setId(BEANS_WITH_PRE_SLELECTED_VALUE);
+        comboBoxWithBeanWithPreSelectedValue.setItemLabelGenerator(
+                item -> item.getLastName() + ", " + item.getFirstName());
+        comboBoxWithBeanWithPreSelectedValue.setItems(PRE_SELECTED_PERSON_FOR_COMBOBOX_WITH_BEANS,
+                new Person("Jeff", "Johnson", 30),
+                new Person("Diana", "Meyer", 40));
+        comboBoxWithBeanWithPreSelectedValue.setValue(PRE_SELECTED_PERSON_FOR_COMBOBOX_WITH_BEANS);
+        add(comboBoxWithBeanWithPreSelectedValue);
     }
 
 }
