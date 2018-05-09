@@ -59,7 +59,7 @@ public class DialogElement extends TestBenchElement {
      * @return the overlay element
      */
     private TestBenchElement getOverlay() {
-        return getPropertyElement("$", "overlay");
+        return getPropertyElement("$", "overlay", "content");
     }
 
 }
