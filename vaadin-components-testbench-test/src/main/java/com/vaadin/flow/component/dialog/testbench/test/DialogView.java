@@ -15,7 +15,6 @@
  */
 package com.vaadin.flow.component.dialog.testbench.test;
 
-import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.common.testbench.test.AbstractView;
 import com.vaadin.flow.component.dialog.Dialog;
@@ -36,14 +35,7 @@ public class DialogView extends AbstractView {
         dialog.setId(THE_DIALOG);
         dialog.add(new Label("This is the contents of the dialog"));
         dialog.add(new Button("Close", e -> dialog.close()));
-    }
-
-    @Override
-    protected void onAttach(AttachEvent attachEvent) {
-        super.onAttach(attachEvent);
-        // Workaround for https://github.com/vaadin/flow/issues/3279
         dialog.open();
-
     }
 
 }
