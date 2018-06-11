@@ -20,11 +20,11 @@
         <ci-sauce.version>1.132</ci-sauce.version>
         <maven.deploy.skip>true</maven.deploy.skip>
 
-        <flow.version>1.0.0.rc2</flow.version>
+        <flow.version>1.0.0.rc3</flow.version>
 
         <vaadin.button.flow.version>1.0.0.rc1</vaadin.button.flow.version>
         <vaadin.checkbox.flow.version>1.0.0.rc1</vaadin.checkbox.flow.version>
-        <vaadin.combo.box.flow.version>1.0.0.rc2</vaadin.combo.box.flow.version>
+        <vaadin.combo.box.flow.version>1.0.0.rc3</vaadin.combo.box.flow.version>
         <vaadin.date.picker.flow.version>1.0.0.rc3</vaadin.date.picker.flow.version>
         <vaadin.dialog.flow.version>1.0.0.rc1</vaadin.dialog.flow.version>
         <vaadin.form.layout.flow.version>1.0.0.rc1</vaadin.form.layout.flow.version>
