@@ -22,6 +22,7 @@ import java.util.Locale;
 import org.junit.Assert;
 import org.junit.Before;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import com.vaadin.flow.component.common.testbench.HasLabel;
@@ -49,7 +50,12 @@ public abstract class AbstractIT extends AbstractParallelSauceLabsTest {
             for (String browserName : browsers.split(",")) {
                 Browser browser = Browser.valueOf(
                         browserName.toUpperCase(Locale.ENGLISH).trim());
-                finalList.add(browser.getDesiredCapabilities());
+                DesiredCapabilities capabilities = browser
+                        .getDesiredCapabilities();
+                if (BrowserUtil.isIE(capabilities)) {
+                    capabilities.setPlatform(Platform.WIN8_1);
+                }
+                finalList.add(capabilities);
             }
         } else {
             finalList.add(BrowserUtil.chrome());
