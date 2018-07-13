@@ -21,10 +21,6 @@
 
     <pluginRepositories>
         <pluginRepository>
-            <id>vaadin-addons</id>
-            <url>http://maven.vaadin.com/vaadin-addons</url>
-        </pluginRepository>
-        <pluginRepository>
             <id>vaadin-prereleases</id>
             <url>http://maven.vaadin.com/vaadin-prereleases</url>
         </pluginRepository>
@@ -34,10 +30,6 @@
         </pluginRepository>
     </pluginRepositories>
     <repositories>
-        <repository>
-            <id>vaadin-addons</id>
-            <url>http://maven.vaadin.com/vaadin-addons</url>
-        </repository>
         <repository>
             <id>vaadin-prereleases</id>
             <url>http://maven.vaadin.com/vaadin-prereleases</url>
