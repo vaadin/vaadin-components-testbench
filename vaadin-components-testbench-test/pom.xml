@@ -20,7 +20,7 @@
         <ci-sauce.version>1.132</ci-sauce.version>
         <maven.deploy.skip>true</maven.deploy.skip>
 
-        <flow.version>1.0.0</flow.version>
+        <flow.version>1.0.2</flow.version>
 
         <vaadin.button.flow.version>1.0.0</vaadin.button.flow.version>
         <vaadin.checkbox.flow.version>1.0.0</vaadin.checkbox.flow.version>
