@@ -32,9 +32,10 @@ public class ComboBoxElement extends TestBenchElement
 
     @Override
     public void selectByText(String text) {
+        openPopup();
         Boolean success = (Boolean) executeScript("var combobox = arguments[0];" //
                 + "var text = arguments[1];" //
-                + "var matches = combobox.items.filter(function(item) {return combobox._getItemLabel(item) == text;});"
+                + "var matches = combobox.filteredItems.filter(function(item) {return combobox._getItemLabel(item) == text;});"
                 + "if (matches.length == 0) {" //
                 + "  return false;" //
                 + "} else {" //
@@ -49,12 +50,13 @@ public class ComboBoxElement extends TestBenchElement
 
     @Override
     public String getSelectedText() {
+        openPopup();
         return (String) executeScript("var combobox = arguments[0];" //
                 + "var selectedItem = combobox.selectedItem;" //
                 + "if (!selectedItem) " //
                 + "  return '';" //
                 + "else " //
-                + "  return combobox._getItemLabel(combobox.items.filter(function(item) { return item.key == selectedItem.key;})[0])",
+                + "  return combobox._getItemLabel(combobox.filteredItems.filter(function(item) { return item.key == selectedItem.key;})[0])",
                 this);
     }
 
@@ -102,6 +104,7 @@ public class ComboBoxElement extends TestBenchElement
      *            the filter to use for filtering options
      */
     public void setFilter(String filter) {
+        openPopup();
         setProperty("filter", filter);
     }
 
