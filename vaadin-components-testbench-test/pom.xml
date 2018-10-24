@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-components-testbench-parent</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>2.0-SNAPSHOT</version>
     </parent>
     <artifactId>vaadin-components-testbench-test</artifactId>
     <packaging>war</packaging>
@@ -20,26 +20,27 @@
         <ci-sauce.version>1.132</ci-sauce.version>
         <maven.deploy.skip>true</maven.deploy.skip>
 
-        <flow.version>1.0.5</flow.version>
+        <flow.version>1.2.0.alpha1</flow.version>
 
-        <vaadin.button.flow.version>1.0.0</vaadin.button.flow.version>
-        <vaadin.checkbox.flow.version>1.0.0</vaadin.checkbox.flow.version>
-        <vaadin.combo.box.flow.version>1.0.0</vaadin.combo.box.flow.version>
-        <vaadin.date.picker.flow.version>1.0.0</vaadin.date.picker.flow.version>
-        <vaadin.dialog.flow.version>1.0.0</vaadin.dialog.flow.version>
-        <vaadin.form.layout.flow.version>1.0.0</vaadin.form.layout.flow.version>
-        <vaadin.grid.flow.version>1.0.0</vaadin.grid.flow.version>
-        <vaadin.icons.flow.version>1.0.0</vaadin.icons.flow.version>
-        <vaadin.iron.list.flow.version>1.0.0</vaadin.iron.list.flow.version>
-        <vaadin.list.box.flow.version>1.0.0</vaadin.list.box.flow.version>
-        <vaadin.notification.flow.version>1.0.0</vaadin.notification.flow.version>
-        <vaadin.ordered.layout.flow.version>1.0.0</vaadin.ordered.layout.flow.version>
-        <vaadin.progress.bar.flow.version>1.0.0</vaadin.progress.bar.flow.version>
-        <vaadin.radio.button.flow.version>1.0.0</vaadin.radio.button.flow.version>
-        <vaadin.split.layout.flow.version>1.0.0</vaadin.split.layout.flow.version>
-        <vaadin.tabs.flow.version>1.0.0</vaadin.tabs.flow.version>
-        <vaadin.text.field.flow.version>1.0.0</vaadin.text.field.flow.version>
-        <vaadin.upload.flow.version>1.0.0</vaadin.upload.flow.version>
+        <vaadin.button.version>1.1.0</vaadin.button.version>
+        <vaadin.checkbox.version>1.1.0</vaadin.checkbox.version>
+        <vaadin.combo.box.version>2.0.0.alpha1</vaadin.combo.box.version>
+        <vaadin.context.menu.version>1.2.0.alpha1</vaadin.context.menu.version>
+        <vaadin.date.picker.version>1.2.0.alpha1</vaadin.date.picker.version>
+        <vaadin.dialog.version>1.2.0.alpha1</vaadin.dialog.version>
+        <vaadin.form.layout.version>1.1.0</vaadin.form.layout.version>
+        <vaadin.grid.version>2.1.0.alpha1</vaadin.grid.version>
+        <vaadin.icons.version>1.2.0.alpha1</vaadin.icons.version>
+        <iron.list.version>1.1.0</iron.list.version>
+        <vaadin.list.box.version>1.1.0</vaadin.list.box.version>
+        <vaadin.notification.version>1.2.0.alpha1</vaadin.notification.version>
+        <vaadin.ordered.layout.version>1.1.0</vaadin.ordered.layout.version>
+        <vaadin.progress.bar.version>1.1.0</vaadin.progress.bar.version>
+        <vaadin.radio.button.version>1.1.0</vaadin.radio.button.version>
+        <vaadin.split.layout.version>1.1.0</vaadin.split.layout.version>
+        <vaadin.tabs.version>1.1.0</vaadin.tabs.version>
+        <vaadin.text.field.version>1.1.0</vaadin.text.field.version>
+        <vaadin.upload.version>1.1.0</vaadin.upload.version>
     </properties>
     <dependencies>
         <dependency>
@@ -65,92 +66,92 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-button-flow</artifactId>
-            <version>${vaadin.button.flow.version}</version>
+            <version>${vaadin.button.version}</version>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-checkbox-flow</artifactId>
-            <version>${vaadin.checkbox.flow.version}</version>
+            <version>${vaadin.checkbox.version}</version>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-combo-box-flow</artifactId>
-            <version>${vaadin.combo.box.flow.version}</version>
+            <version>${vaadin.combo.box.version}</version>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-date-picker-flow</artifactId>
-            <version>${vaadin.date.picker.flow.version}</version>
+            <version>${vaadin.date.picker.version}</version>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-dialog-flow</artifactId>
-            <version>${vaadin.dialog.flow.version}</version>
+            <version>${vaadin.dialog.version}</version>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-form-layout-flow</artifactId>
-            <version>${vaadin.form.layout.flow.version}</version>
+            <version>${vaadin.form.layout.version}</version>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-grid-flow</artifactId>
-            <version>${vaadin.grid.flow.version}</version>
+            <version>${vaadin.grid.version}</version>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-icons-flow</artifactId>
-            <version>${vaadin.icons.flow.version}</version>
+            <version>${vaadin.icons.version}</version>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-iron-list-flow</artifactId>
-            <version>${vaadin.iron.list.flow.version}</version>
+            <version>${iron.list.version}</version>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-list-box-flow</artifactId>
-            <version>${vaadin.list.box.flow.version}</version>
+            <version>${vaadin.list.box.version}</version>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-notification-flow</artifactId>
-            <version>${vaadin.notification.flow.version}</version>
+            <version>${vaadin.notification.version}</version>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-ordered-layout-flow</artifactId>
-            <version>${vaadin.ordered.layout.flow.version}</version>
+            <version>${vaadin.ordered.layout.version}</version>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-progress-bar-flow</artifactId>
-            <version>${vaadin.progress.bar.flow.version}</version>
+            <version>${vaadin.progress.bar.version}</version>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-radio-button-flow</artifactId>
-            <version>${vaadin.radio.button.flow.version}</version>
+            <version>${vaadin.radio.button.version}</version>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-split-layout-flow</artifactId>
-            <version>${vaadin.split.layout.flow.version}</version>
+            <version>${vaadin.split.layout.version}</version>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-tabs-flow</artifactId>
-            <version>${vaadin.tabs.flow.version}</version>
+            <version>${vaadin.tabs.version}</version>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-text-field-flow</artifactId>
-            <version>${vaadin.text.field.flow.version}</version>
+            <version>${vaadin.text.field.version}</version>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-upload-flow</artifactId>
-            <version>${vaadin.upload.flow.version}</version>
+            <version>${vaadin.upload.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -200,7 +201,7 @@
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.3.7.v20160115</version>
+                <version>9.4.11.v20180605</version>
                 <configuration>
                     <stopPort>9999</stopPort>
                     <stopWait>5</stopWait>

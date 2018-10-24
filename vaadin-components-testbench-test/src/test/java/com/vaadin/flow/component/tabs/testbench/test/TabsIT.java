@@ -36,8 +36,8 @@ public class TabsIT extends AbstractIT {
     @Test
     public void selectTabByIndex() throws Exception {
         Assert.assertEquals(0, def.getSelectedTabIndex());
-        def.setSelectedTabIndex(1);
-        Assert.assertEquals(1, def.getSelectedTabIndex());
+        def.setSelectedTabIndex(2);
+        Assert.assertEquals(2, def.getSelectedTabIndex());
         def.setSelectedTabIndex(0);
         Assert.assertEquals(0, def.getSelectedTabIndex());
     }
@@ -51,7 +51,7 @@ public class TabsIT extends AbstractIT {
             return;
         }
         def.getSelectedTabElement().$(ButtonElement.class).first().click();
-        Assert.assertEquals("1. Hello clicked", getLogRow(0));
+        Assert.assertEquals("2. Hello clicked", getLogRow(0));
         def.setSelectedTabIndex(2);
         Assert.assertEquals("Text", def.getSelectedTabElement().getText());
     }
