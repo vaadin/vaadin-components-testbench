@@ -32,7 +32,8 @@ public class ComboBoxElement extends TestBenchElement
 
     @Override
     public void selectByText(String text) {
-        openPopup();
+        setFilter(text);
+        waitForVaadin();
         Boolean success = (Boolean) executeScript("var combobox = arguments[0];" //
                 + "var text = arguments[1];" //
                 + "var matches = combobox.filteredItems.filter(function(item) {return combobox._getItemLabel(item) == text;});"
@@ -42,6 +43,7 @@ public class ComboBoxElement extends TestBenchElement
                 + "  var value = combobox._getItemValue(matches[0]);"
                 + "  combobox.value = value;" + "  return true;" //
                 + "}", this, text);
+        closePopup();
         if (!success) {
             throw new IllegalArgumentException(
                     "Value '" + text + "' not found in the combobox");
@@ -50,13 +52,12 @@ public class ComboBoxElement extends TestBenchElement
 
     @Override
     public String getSelectedText() {
-        openPopup();
         return (String) executeScript("var combobox = arguments[0];" //
                 + "var selectedItem = combobox.selectedItem;" //
                 + "if (!selectedItem) " //
                 + "  return '';" //
                 + "else " //
-                + "  return combobox._getItemLabel(combobox.filteredItems.filter(function(item) { return item.key == selectedItem.key;})[0])",
+                + "  return combobox.inputElement.value;",
                 this);
     }
 
@@ -106,6 +107,7 @@ public class ComboBoxElement extends TestBenchElement
     public void setFilter(String filter) {
         openPopup();
         setProperty("filter", filter);
+        waitUntil(driver -> !getPropertyBoolean("loading"));
     }
 
     /**

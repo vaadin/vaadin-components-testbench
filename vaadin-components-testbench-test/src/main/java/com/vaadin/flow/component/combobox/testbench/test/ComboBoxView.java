@@ -29,6 +29,7 @@ import com.vaadin.flow.theme.lumo.Lumo;
 public class ComboBoxView extends AbstractView {
 
     public static final String TEXT = "text";
+    public static final String LAZY = "lazy";
     public static final String NOTEXT = "notext";
     public static final String BEANS = "beans";
     public static final String TEXT_WITH_PRE_SLELECTED_VALUE = "text_with_preselected_value";
@@ -60,6 +61,16 @@ public class ComboBoxView extends AbstractView {
                     + e.getValue());
         });
         add(comboBoxWithText);
+        
+        ComboBox<String> comboBoxLazy = new ComboBox<>("Lazy");
+        comboBoxLazy.setId(LAZY);
+        comboBoxLazy
+                .setItems(IntStream.range(0, 500).mapToObj(i -> "Item " + i));
+        comboBoxLazy.addValueChangeListener(e -> {
+            log("ComboBox '" + e.getSource().getLabel() + "' value is now "
+                    + e.getValue());
+        });
+        add(comboBoxLazy);
 
         ComboBox<Person> comboBoxWithBean = new ComboBox<>("Persons");
         comboBoxWithBean.setId(BEANS);

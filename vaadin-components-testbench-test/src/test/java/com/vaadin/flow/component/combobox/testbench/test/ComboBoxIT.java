@@ -29,6 +29,7 @@ public class ComboBoxIT extends AbstractIT {
     private ComboBoxElement comboBoxWithText;
     private ComboBoxElement comboBoxWithNoText;
     private ComboBoxElement comboBoxWithBeans;
+    private ComboBoxElement comboBoxWithLazy;
 
     private ComboBoxElement comboBoxWithTextWithPreSelectedValue;
     private ComboBoxElement comboBoxWithNoTextWithPreSelectedValue;
@@ -39,6 +40,7 @@ public class ComboBoxIT extends AbstractIT {
         comboBoxWithText = $(ComboBoxElement.class).id(ComboBoxView.TEXT);
         comboBoxWithNoText = $(ComboBoxElement.class).id(ComboBoxView.NOTEXT);
         comboBoxWithBeans = $(ComboBoxElement.class).id(ComboBoxView.BEANS);
+        comboBoxWithLazy = $(ComboBoxElement.class).id(ComboBoxView.LAZY);
 
         comboBoxWithTextWithPreSelectedValue = $(ComboBoxElement.class).id(ComboBoxView.TEXT_WITH_PRE_SLELECTED_VALUE);
         comboBoxWithNoTextWithPreSelectedValue = $(ComboBoxElement.class).id(ComboBoxView.NOTEXT_WITH_PRE_SLELECTED_VALUE);
@@ -49,6 +51,7 @@ public class ComboBoxIT extends AbstractIT {
     public void getLabel() throws Exception {
         Assert.assertEquals("", comboBoxWithNoText.getLabel());
         Assert.assertEquals("Text", comboBoxWithText.getLabel());
+        Assert.assertEquals("Lazy", comboBoxWithLazy.getLabel());
         Assert.assertEquals("Persons", comboBoxWithBeans.getLabel());
     }
 
@@ -56,19 +59,27 @@ public class ComboBoxIT extends AbstractIT {
     public void selectByText() throws Exception {
         Assert.assertEquals("", comboBoxWithNoText.getSelectedText());
         Assert.assertEquals("", comboBoxWithText.getSelectedText());
+        Assert.assertEquals("", comboBoxWithLazy.getSelectedText());
         Assert.assertEquals("", comboBoxWithBeans.getSelectedText());
 
         comboBoxWithNoText.selectByText("Item 1");
         Assert.assertEquals("1. ComboBox 'null' value is now Item 1",
                 getLogRow(0));
         Assert.assertEquals("Item 1", comboBoxWithNoText.getSelectedText());
+
         comboBoxWithText.selectByText("Item 18");
         Assert.assertEquals("2. ComboBox 'Text' value is now Item 18",
                 getLogRow(0));
         Assert.assertEquals("Item 18", comboBoxWithText.getSelectedText());
+
+        comboBoxWithLazy.selectByText("Item 400");
+        Assert.assertEquals("3. ComboBox 'Lazy' value is now Item 400",
+                getLogRow(0));
+        Assert.assertEquals("Item 400", comboBoxWithLazy.getSelectedText());
+
         comboBoxWithBeans.selectByText("Doe, John");
         Assert.assertEquals(
-                "3. ComboBox 'Persons' value is now Person [firstName=John, lastName=Doe, age=20]",
+                "4. ComboBox 'Persons' value is now Person [firstName=John, lastName=Doe, age=20]",
                 getLogRow(0));
         Assert.assertEquals("Doe, John", comboBoxWithBeans.getSelectedText());
     }
