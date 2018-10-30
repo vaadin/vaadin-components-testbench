@@ -35,8 +35,10 @@ public class ComboBoxView extends AbstractView {
     public static final String TEXT_WITH_PRE_SLELECTED_VALUE = "text_with_preselected_value";
     public static final String NOTEXT_WITH_PRE_SLELECTED_VALUE = "notext_with_preselected_value";
     public static final String BEANS_WITH_PRE_SLELECTED_VALUE = "beans_with_preselected_value";
+    public static final String LAZY_WITH_PRE_SLELECTED_VALUE = "lazy_with_preselected_value";
     public static final String PRE_SELECTED_VALUE_FOR_COMBOBOX_WITHOUT_TEXT = "Item 1";
     public static final String PRE_SELECTED_VALUE_FOR_COMBOBOX_WITH_TEXT = "Item 18";
+    public static final String PRE_SELECTED_VALUE_FOR_COMBOBOX_LAZY= "Item 400";
     public static final Person PRE_SELECTED_PERSON_FOR_COMBOBOX_WITH_BEANS = new Person("John", "Doe", 20);
 
 
@@ -99,6 +101,13 @@ public class ComboBoxView extends AbstractView {
         comboBoxWithTextWithPreSelectedValue.setValue(ComboBoxView.PRE_SELECTED_VALUE_FOR_COMBOBOX_WITH_TEXT);
         add(comboBoxWithTextWithPreSelectedValue);
 
+        ComboBox<String> comboBoxLazyWithPreSelectedValue = new ComboBox<>("Lazy");
+        comboBoxLazyWithPreSelectedValue.setId(LAZY_WITH_PRE_SLELECTED_VALUE);
+        comboBoxLazyWithPreSelectedValue
+                .setItems(IntStream.range(0, 500).mapToObj(i -> "Item " + i));
+        comboBoxLazyWithPreSelectedValue.setValue(ComboBoxView.PRE_SELECTED_VALUE_FOR_COMBOBOX_LAZY);
+        add(comboBoxLazyWithPreSelectedValue);
+        
         ComboBox<Person> comboBoxWithBeanWithPreSelectedValue = new ComboBox<>("Persons");
         comboBoxWithBeanWithPreSelectedValue.setId(BEANS_WITH_PRE_SLELECTED_VALUE);
         comboBoxWithBeanWithPreSelectedValue.setItemLabelGenerator(
