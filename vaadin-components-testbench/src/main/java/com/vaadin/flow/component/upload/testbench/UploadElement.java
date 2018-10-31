@@ -68,7 +68,9 @@ public class UploadElement extends TestBenchElement {
         // Element must be focusable for Edge and Firefox
         Boolean hidden = uploadElement.getPropertyBoolean("hidden");
         uploadElement.setProperty("hidden", false);
-
+        if (BrowserUtil.isFirefox(getCapabilities())) {
+            executeScript("arguments[0].style.display = \"block\";", uploadElement);
+        }
         if (!BrowserUtil.isEdge(getCapabilities())) {
             // Firefox uploads the previous file again without this
             // Edge throws "InvalidElementStateException: The element is not
@@ -77,7 +79,9 @@ public class UploadElement extends TestBenchElement {
         }
         uploadElement.sendKeys(file.getPath());
         uploadElement.setProperty("hidden", hidden);
-
+        if (BrowserUtil.isFirefox(getCapabilities())) {
+            executeScript("arguments[0].style.display = \"\";", uploadElement);
+        }
         if (maxSeconds > 0) {
             waitForUploads(maxSeconds);
         }

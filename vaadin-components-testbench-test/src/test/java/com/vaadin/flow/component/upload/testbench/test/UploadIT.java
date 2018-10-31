@@ -52,11 +52,6 @@ public class UploadIT extends AbstractIT {
 
     @Test
     public void upload() throws Exception {
-        if (BrowserUtil.isFirefox(getDesiredCapabilities())) {
-            // Firefox has issues with interaction with hidden file input
-            // https://github.com/mozilla/geckodriver/issues/1173
-            throw new AssumptionViolatedException("Firefox doesn't allow interaction with hidden file input");
-        }
         byte[] file1Contents = "This is file 1"
                 .getBytes(StandardCharsets.UTF_8);
         byte[] file2Contents = "This is another åäö file"
