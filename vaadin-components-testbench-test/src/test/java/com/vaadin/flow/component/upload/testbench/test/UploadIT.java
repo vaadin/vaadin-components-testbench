@@ -51,7 +51,7 @@ public class UploadIT extends AbstractIT {
 
     @Test
     public void upload() throws Exception {
-        if (!BrowserUtil.isFirefox(getDesiredCapabilities())) {
+        if (BrowserUtil.isFirefox(getDesiredCapabilities())) {
             // firefox has issues with interaction with hidden file input
             // https://github.com/mozilla/geckodriver/issues/1173
             return;
