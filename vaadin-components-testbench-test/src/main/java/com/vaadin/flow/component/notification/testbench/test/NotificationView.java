@@ -35,12 +35,12 @@ public class NotificationView extends AbstractView {
     @Override
     protected void onAttach(AttachEvent attachEvent) {
         super.onAttach(attachEvent);
-        Notification notification = Notification.show("", 10000,
+        Notification notification = Notification.show("", 20000,
                 Position.TOP_CENTER);
         notification.setId(NOTEXT);
         add(notification);
 
-        Notification notification2 = Notification.show("Some text", 10000,
+        Notification notification2 = Notification.show("Some text", 20000,
                 Position.TOP_CENTER);
         notification2.setId(TEXT);
         notification2.getElement().addEventListener("click", e -> {
