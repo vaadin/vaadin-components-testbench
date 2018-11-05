@@ -29,7 +29,7 @@
         <vaadin.date.picker.version>1.2.0</vaadin.date.picker.version>
         <vaadin.dialog.version>1.2.0</vaadin.dialog.version>
         <vaadin.form.layout.version>1.2.0</vaadin.form.layout.version>
-        <vaadin.grid.version>2.1.0.beta1</vaadin.grid.version>
+        <vaadin.grid.version>2.1.0</vaadin.grid.version>
         <vaadin.icons.version>1.2.0</vaadin.icons.version>
         <iron.list.version>1.2.0</iron.list.version>
         <vaadin.list.box.version>1.2.0</vaadin.list.box.version>
