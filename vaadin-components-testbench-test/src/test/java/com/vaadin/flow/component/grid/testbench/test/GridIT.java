@@ -166,13 +166,11 @@ public class GridIT extends AbstractIT {
     @Test
     public void singleSelect() {
         Assert.assertFalse(noHeader.getRow(4).isSelected());
-        noHeader.select(4);
+        noHeader.getRow(4).select();
         Assert.assertTrue(noHeader.getRow(4).isSelected());
-        // https://github.com/vaadin/vaadin-grid-flow/issues/74
-        // Assert.assertEquals(
-        // "1. Grid 'noheader' selection changed to 'Person [firstName=First
-        // Name 4, lastName=Last name 4, age=4]'",
-        // getLogRow(0));
+        Assert.assertEquals(
+                "1. Grid 'noheader' selection changed to 'Person [firstName=First Name 4, lastName=Last name 4, age=4]'",
+                getLogRow(0));
 
         noHeader.select(3);
         Assert.assertFalse(noHeader.getRow(4).isSelected());
@@ -188,10 +186,9 @@ public class GridIT extends AbstractIT {
                 getLogRow(0));
 
         noHeader.deselect(3);
-        // https://github.com/vaadin/vaadin-grid-flow/issues/74
-        // Assert.assertFalse(noHeader.getRow(3).isSelected());
-        // Assert.assertEquals("3. Grid 'noheader' selection changed to '-'",
-        // getLogRow(0));
+        Assert.assertFalse(noHeader.getRow(3).isSelected());
+        Assert.assertEquals("3. Grid 'noheader' selection changed to ''",
+                getLogRow(0));
     }
 
     @Test

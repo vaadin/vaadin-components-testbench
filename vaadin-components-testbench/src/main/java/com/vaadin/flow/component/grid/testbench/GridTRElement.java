@@ -54,16 +54,14 @@ public class GridTRElement extends TestBenchElement {
      * Selects the row if it is not already selected.
      */
     public void select() {
-        executeScript("var grid = arguments[0].getRootNode().host;"
-                + "grid.selectItem(arguments[0]._item);", this);
+        getGrid().select(this);
     }
 
     /**
      * Deselects the row if it is selected.
      */
     public void deselect() {
-        executeScript("var grid = arguments[0].getRootNode().host;"
-                + "grid.deselectItem(arguments[0]._item);", this);
+        getGrid().deselect(this);
     }
 
     /**
