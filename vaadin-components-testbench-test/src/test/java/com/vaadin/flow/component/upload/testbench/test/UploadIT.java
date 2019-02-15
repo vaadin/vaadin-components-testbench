@@ -19,7 +19,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 
 import org.hamcrest.core.StringContains;
 import org.hamcrest.core.StringEndsWith;
@@ -28,7 +27,6 @@ import org.junit.AssumptionViolatedException;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 import com.vaadin.flow.component.common.testbench.test.AbstractIT;
 import com.vaadin.flow.component.upload.testbench.UploadElement;
@@ -43,19 +41,16 @@ public class UploadIT extends AbstractIT {
         upload = $(UploadElement.class).first();
     }
 
-    @Override
-    public List<DesiredCapabilities> getBrowserConfiguration() {
-        List<DesiredCapabilities> browsers = super.getBrowserConfiguration();
-        browsers.remove(BrowserUtil.safari());
-        return browsers;
-    }
-
     @Test
     public void upload() throws Exception {
         if (BrowserUtil.isFirefox(getDesiredCapabilities())) {
             // Firefox has issues with interaction with hidden file input
             // https://github.com/mozilla/geckodriver/issues/1173
             throw new AssumptionViolatedException("Firefox doesn't allow interaction with hidden file input");
+        }
+        if (BrowserUtil.isSafari(getDesiredCapabilities())) {
+            // Safari webdriver does not support file uploads
+            throw new AssumptionViolatedException("Safari webdriver does not support file uploads");
         }
         byte[] file1Contents = "This is file 1"
                 .getBytes(StandardCharsets.UTF_8);

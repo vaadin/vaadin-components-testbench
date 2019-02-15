@@ -22,6 +22,7 @@ import org.junit.Test;
 import com.vaadin.flow.component.common.testbench.test.AbstractIT;
 import com.vaadin.flow.component.splitlayout.testbench.SplitLayoutElement;
 import com.vaadin.flow.component.textfield.testbench.TextFieldElement;
+import com.vaadin.testbench.TestBenchElement;
 
 public class SplitLayoutIT extends AbstractIT {
 
@@ -41,9 +42,8 @@ public class SplitLayoutIT extends AbstractIT {
 
     @Test
     public void findSplitter() throws Exception {
-        int initialLayoutWidth = splitLayout.getSize().getWidth();
-        Assert.assertEquals(initialLayoutWidth / 2,
-                splitLayout.getSplitter().getLocation().getX(), 5);
+        TestBenchElement splitter = splitLayout.getSplitter();
+        Assert.assertNotNull(splitter);
     }
 
 }
