@@ -52,7 +52,9 @@ public abstract class AbstractIT extends AbstractParallelSauceLabsTest {
                         browserName.toUpperCase(Locale.ENGLISH).trim());
                 DesiredCapabilities capabilities = browser
                         .getDesiredCapabilities();
-                if (BrowserUtil.isIE(capabilities)) {
+                if (BrowserUtil.isSafari(capabilities)) {
+                    capabilities.setVersion("11");
+                } else if (BrowserUtil.isIE(capabilities)) {
                     capabilities.setPlatform(Platform.WIN8_1);
                 }
                 finalList.add(capabilities);
