@@ -185,6 +185,12 @@ public class GridIT extends AbstractIT {
                 "2. Grid 'noheader' selection changed to 'Person [firstName=First Name 3, lastName=Last name 3, age=3]'",
                 getLogRow(0));
 
+        noHeader.deselect(2); // NO-OP
+        Assert.assertTrue(noHeader.getRow(3).isSelected());
+        Assert.assertEquals(
+                "2. Grid 'noheader' selection changed to 'Person [firstName=First Name 3, lastName=Last name 3, age=3]'",
+                getLogRow(0));
+
         noHeader.deselect(3);
         Assert.assertFalse(noHeader.getRow(3).isSelected());
         Assert.assertEquals("3. Grid 'noheader' selection changed to ''",

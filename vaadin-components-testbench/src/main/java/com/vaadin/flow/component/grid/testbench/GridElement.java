@@ -319,7 +319,7 @@ public class GridElement extends TestBenchElement {
             executeScript("arguments[0].deselectItem(arguments[1]._item);",
                     this, row);
         } else {
-            resetActiveItem();
+            removeActiveItem(row);
         }
     }
 
@@ -327,8 +327,8 @@ public class GridElement extends TestBenchElement {
         executeScript("arguments[0].activeItem=arguments[1]._item", this, row);
     }
 
-    private void resetActiveItem() {
-        executeScript("arguments[0].activeItem=null", this);
+    private void removeActiveItem(GridTRElement row) {
+        executeScript("if(arguments[0].activeItem == arguments[1]._item) { arguments[0].activeItem=null;}", this, row);
     }
 
     /**
