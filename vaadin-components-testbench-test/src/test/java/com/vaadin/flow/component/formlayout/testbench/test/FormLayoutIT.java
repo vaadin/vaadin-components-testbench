@@ -39,4 +39,10 @@ public class FormLayoutIT extends AbstractIT {
                 formLayout.$(TextFieldElement.class).all().size());
     }
 
+    @Test
+    public void listenBubbledEvent() throws Exception {
+        formLayout.$(TextFieldElement.class).first().setValue("New Value");
+        Assert.assertEquals("1. Change event in vaadin-form-layout", getLogRow(0));
+    }
+
 }
