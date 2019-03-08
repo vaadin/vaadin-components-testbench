@@ -10,21 +10,20 @@ public class EventsUtil {
 
     /**
      * Dispatches (fires) a custom event of the given type on the element with
-     * the given detail
-     * <p>
+     * the given properties
      *
      * @param element
      *            element that will dispatch the event
      * @param eventType
      *            the type of custom event to dispatch
-     * @param details
-     *            map with properties and values that will be included as event
-     *            details
+     * @param customEventInit
+     *            map with properties and values that will be used to initialize
+     *            the event
      */
     public static void dispatchEvent(TestBenchElement element, String eventType,
-            Map<String, Object> details) {
+            Map<String, Object> customEventInit) {
         element.executeScript(
                 "arguments[0].dispatchEvent(new CustomEvent(arguments[1], arguments[2]));",
-                element, eventType, details);
+                element, eventType, customEventInit);
     }
 }
