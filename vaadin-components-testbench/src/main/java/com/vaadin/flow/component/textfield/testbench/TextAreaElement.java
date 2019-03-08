@@ -15,8 +15,11 @@
  */
 package com.vaadin.flow.component.textfield.testbench;
 
+import java.util.Collections;
+
 import com.vaadin.flow.component.common.testbench.HasLabel;
 import com.vaadin.flow.component.common.testbench.HasPlaceholder;
+import com.vaadin.testbench.EventsUtil;
 import com.vaadin.testbench.HasStringValueProperty;
 import com.vaadin.testbench.TestBenchElement;
 import com.vaadin.testbench.elementsbase.Element;
@@ -31,7 +34,8 @@ public class TextAreaElement extends TestBenchElement
     @Override
     public void setValue(String string) {
         HasStringValueProperty.super.setValue(string);
-        dispatchEvent("change");
+        EventsUtil.dispatchEvent(this, "change",
+                Collections.singletonMap("bubbles", true));
         dispatchEvent("blur");
     }
 
